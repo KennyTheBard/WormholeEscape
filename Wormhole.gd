@@ -12,9 +12,13 @@ onready var advancing_timer : Timer = $AdvancingTimer
 var rings : Array = []
 var advancing : bool = false
 
+var image : Image = Image.new()
+var bomb_texture : ImageTexture = ImageTexture.new()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	image.load("res://icon.png")
+	bomb_texture.create_from_image(image)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,6 +36,7 @@ func advance():
 	# add a new ring to the scene
 	var instance = ring_scene.instance()
 	instance.global_position = center.global_position
+	instance.init(bomb_texture, [45, 120, 225])
 	rings.push_back(instance)
 	ring_container.add_child(instance)
 	

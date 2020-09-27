@@ -8,16 +8,13 @@ onready var radius_tween : Tween = $RadiusTween
 var radius : float = 0
 var ring_rotation : float = 0
 
-var image : Image = Image.new()
-var texture : ImageTexture = ImageTexture.new()
-
-var bomb_positions : Array = [275, 325, 355]
+var bomb_positions : Array
+var bomb_texture : ImageTexture
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	image.load("res://icon.png")
-	texture.create_from_image(image)
+func init(bomb_texture : ImageTexture, bomb_positions : Array = []):
+	self.bomb_texture = bomb_texture
+	self.bomb_positions = bomb_positions
 
 
 func _process(delta):
@@ -32,7 +29,7 @@ func _draw():
 		var radians = deg2rad(pos + ring_rotation)
 		var bomb_position = Vector2(cos(radians), -sin(radians)) * radius
 		var bomb_size = Vector2(radius / 15, radius / 15)
-		draw_texture_rect(texture, Rect2(bomb_position - bomb_size/2, bomb_size), false)
+		draw_texture_rect(bomb_texture, Rect2(bomb_position - bomb_size/2, bomb_size), false)
 
 
 func increase_radius(radius : float, transition_period : float = 1.0) -> void:
