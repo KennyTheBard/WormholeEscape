@@ -1,0 +1,45 @@
+extends Node2D
+
+export(int) var num_rings = 10
+export(float) var advancing_period = 1.5
+
+onready var ring_scene : PackedScene = preload("res://Ring.tscn")
+
+onready var center : Position2D = $Center
+onready var ring_container : Node2D = $RingContainer
+onready var advancing_timer : Timer = $AdvancingTimer
+
+var rings : Array = []
+var advancing : bool = false
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if Input.is_action_just_pressed("advance") and not advancing:
+		advancing = true
+		advance()
+
+
+func advance():
+	# remove a ring if the desired number is reached
+	if rings.size() >= num_rings:
+		ring_container.remove_child(rings.pop_front())
+	
+	# add a new ring to the scene
+	var instance = ring_scene.instance()
+	instance.global_position = center.global_position
+	rings.push_back(instance)
+	ring_container.add_child(instance)
+	
+	# start a radius increase transition
+	for ring in rings:
+		ring.increase_radius(ring.radius + 100, advancing_period)
+	advancing_timer.start(advancing_period)
+
+
+func _on_AdvancingTimer_timeout():
+	advancing = false
