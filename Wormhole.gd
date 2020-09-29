@@ -1,6 +1,6 @@
 extends Node2D
 
-export(int) var num_rings = 10
+export(int) var num_rings = 20
 export(float) var advancing_period = 1.5
 
 onready var ring_scene : PackedScene = preload("res://Ring.tscn")
@@ -11,7 +11,7 @@ onready var advancing_timer : Timer = $AdvancingTimer
 
 var rings : Array = []
 var advancing : bool = false
-
+var level : int = 1
 var image : Image = Image.new()
 var bomb_texture : ImageTexture = ImageTexture.new()
 
@@ -29,6 +29,9 @@ func _process(delta):
 
 
 func advance():
+	# increment level
+	level += 1
+	
 	# remove a ring if the desired number is reached
 	if rings.size() >= num_rings:
 		ring_container.remove_child(rings.pop_front())
@@ -42,8 +45,16 @@ func advance():
 	
 	# start a radius increase transition
 	for ring in rings:
-		ring.increase_radius(ring.radius + 100, advancing_period)
+		ring.increase_radius(ring.radius * 1.5, advancing_period)
 	advancing_timer.start(advancing_period)
+
+
+func generate_ring() -> Node2D:
+	var instance = ring_scene.instance()
+	var walls = range()
+	instance.global_position = center.global_position
+	instance.init(bomb_texture, [45, 120, 225])
+	return instance
 
 
 func _on_AdvancingTimer_timeout():
