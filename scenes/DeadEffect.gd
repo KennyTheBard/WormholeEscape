@@ -2,7 +2,7 @@ extends Node2D
 
 signal dead_effect_ended
 
-export(float) var effect_duration = 1
+export(float) var effect_duration = 1.2
 
 onready var transparency_tween : Tween = $TransparencyTween
 onready var radius_tween : Tween = $RadiusTween
@@ -15,13 +15,13 @@ var playing : bool = false
 
 func play_effect():
 	# set transparency tween
-	transparency_tween.interpolate_property(self, "circle_color", Color(1, 1, 1, 0.75), Color(1, 1, 1, 0),
-		effect_duration, Tween.TRANS_CIRC, Tween.EASE_IN)
+	transparency_tween.interpolate_property(self, "circle_color", Color(1, 1, 1, 1), Color(1, 1, 1, 0),
+		effect_duration, Tween.TRANS_CIRC, Tween.EASE_OUT)
 	transparency_tween.start()
 	
 	# set radius tween
-	radius_tween.interpolate_property(self, "radius", 0, 200,
-		effect_duration, Tween.TRANS_CIRC, Tween.EASE_IN)
+	radius_tween.interpolate_property(self, "radius", 20, 200,
+		effect_duration, Tween.TRANS_CIRC, Tween.EASE_OUT)
 	radius_tween.start()
 	
 	# start playing
