@@ -67,12 +67,17 @@ func advance():
 	for ring in rings:
 		ring.increase_radius(ring.radius * radius_increase_factor, advancing_period)
 	advancing_timer.start(advancing_period)
+	player.toggle_thrusters(true)
 	
 	# add a new ring to the scene
 	var instance = generate_ring()
 	instance.radius = initial_radius
 	rings.push_front(instance)
 	ring_container.add_child(instance)
+	
+	# stop rings rotation
+	for ring in rings:
+		ring.rotating = false
 
 
 func generate_ring(empty : bool = false) -> Node2D:
@@ -101,3 +106,8 @@ func generate_ring(empty : bool = false) -> Node2D:
 
 func _on_AdvancingTimer_timeout():
 	advancing = false
+	player.toggle_thrusters(false)
+	
+	# start rings rotation
+	for ring in rings:
+		ring.rotating = true

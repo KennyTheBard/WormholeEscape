@@ -77,7 +77,7 @@ playback/repeat = true
 [node name="AdvancingTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="Stars" type="Particles2D" parent="."]
 position = Vector2( 512, 300 )
 scale = Vector2( 2, 2 )
 amount = 500
@@ -89,4 +89,5 @@ process_material = SubResource( 7 )
 texture = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+look_to_path = NodePath("../Center")
 [connection signal="timeout" from="AdvancingTimer" to="." method="_on_AdvancingTimer_timeout"]

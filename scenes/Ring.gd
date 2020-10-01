@@ -7,6 +7,7 @@ onready var radius_tween : Tween = $RadiusTween
 var radius : float = 8
 var ring_rotation : float = 0
 var ring_rotation_ps : float = 0
+var rotating : bool = true
 
 var bomb_positions : Array = []
 var bomb_texture : ImageTexture
@@ -17,7 +18,8 @@ func init(bomb_texture : ImageTexture):
 
 
 func _process(delta):
-	ring_rotation = int(ring_rotation + delta * ring_rotation_ps) % 360
+	if rotating:
+		ring_rotation = int(ring_rotation + delta * ring_rotation_ps) % 360
 	update()
 
 
