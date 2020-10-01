@@ -26,7 +26,7 @@ func _draw():
 	
 	for pos in bomb_positions:
 		var bomb_position = calculate_position_on_ring(pos + ring_rotation)
-		var bomb_size = Vector2(radius / 12, radius / 12)
+		var bomb_size = Vector2(radius / 3, radius / 3)
 		draw_texture_rect(bomb_texture,
 			Rect2(bomb_position - bomb_size/2, bomb_size),
 			false,

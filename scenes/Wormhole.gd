@@ -23,7 +23,7 @@ var bomb_texture : ImageTexture = ImageTexture.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	image.load("res://assets/icon.png")
+	image.load("res://assets/star_06.png")
 	bomb_texture.create_from_image(image)
 	
 	var radius = initial_radius
