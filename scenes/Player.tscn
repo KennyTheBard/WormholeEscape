@@ -24,7 +24,8 @@ orbit_velocity_random = 0.0
 scale = 4.0
 scale_curve = SubResource( 3 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="Area2D"]
+collision_mask = 4
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -41,3 +42,4 @@ amount = 100
 visibility_rect = Rect2( -200, -100, 200, 200 )
 local_coords = false
 process_material = SubResource( 4 )
+[connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]

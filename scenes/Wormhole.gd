@@ -12,20 +12,17 @@ onready var center : Position2D = $Center
 onready var ring_container : Node2D = $RingContainer
 onready var advancing_timer : Timer = $AdvancingTimer
 onready var player = $Player
+onready var dead_effect = $DeadEffect
 
 var rings : Array = []
 var advancing : bool = false
 var level : int = 1
 var player_angle : float = 180
+var game_over : bool = false
 
-var image : Image = Image.new()
-var bomb_texture : ImageTexture = ImageTexture.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	image.load("res://assets/star_06.png")
-	bomb_texture.create_from_image(image)
-	
 	var radius = initial_radius
 	for i in range(num_rings):
 		# create empty ring instance
@@ -45,12 +42,13 @@ func _process(delta):
 	
 	# calculate angle position of player and update angle position
 	var curr_ring = rings[ring_index]
-	player_angle = int(player_angle + delta * curr_ring.ring_rotation_ps) % 360
+	if curr_ring.rotating:
+		player_angle = int(player_angle + delta * curr_ring.ring_rotation_ps) % 360
 	var relative_position : Vector2 = curr_ring.calculate_position_on_ring(player_angle)
 	player.global_position = center.global_position + relative_position
 	
 	# advance on key pressed
-	if Input.is_action_just_pressed("advance"):
+	if Input.is_action_just_pressed("advance") and not game_over:
 		advancing = true
 		advance()
 
@@ -74,17 +72,13 @@ func advance():
 	instance.radius = initial_radius
 	rings.push_front(instance)
 	ring_container.add_child(instance)
-	
-	# stop rings rotation
-	for ring in rings:
-		ring.rotating = false
+	toggle_rings_rotation(false)
 
 
 func generate_ring(empty : bool = false) -> Node2D:
 	# create new instance
 	var instance = ring_scene.instance()
 	instance.global_position = center.global_position
-	instance.init(bomb_texture)
 	
 	if not empty:
 		# randomly populate the ring with bombs
@@ -92,7 +86,7 @@ func generate_ring(empty : bool = false) -> Node2D:
 		var bombs = []
 		for _i in range(num_bombs):
 			bombs += [randi() % 360]
-		instance.bomb_positions = bombs
+		instance.create_bombs(bombs)
 		
 		# randomly set rotation speed and direction
 		var max_rotation_speed = 60 + level
@@ -107,7 +101,21 @@ func generate_ring(empty : bool = false) -> Node2D:
 func _on_AdvancingTimer_timeout():
 	advancing = false
 	player.toggle_thrusters(false)
-	
-	# start rings rotation
+	toggle_rings_rotation(true)
+
+
+func toggle_rings_rotation(active : bool):
 	for ring in rings:
-		ring.rotating = true
+		ring.rotating = active
+
+
+func _on_Player_died():
+	game_over = true
+	toggle_rings_rotation(false)
+	player.visible = false
+	dead_effect.global_position = player.global_position
+	dead_effect.play_effect()
+
+
+func _on_DeadEffect_dead_effect_ended():
+	print("GAME OVER")

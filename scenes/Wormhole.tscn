@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Wormhole.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/star_04.png" type="Texture" id=4]
 [ext_resource path="res://assets/star_06.png" type="Texture" id=5]
 [ext_resource path="res://scenes/Center.gd" type="Script" id=6]
+[ext_resource path="res://scenes/DeadEffect.gd" type="Script" id=7]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -90,4 +91,17 @@ texture = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 look_to_path = NodePath("../Center")
+
+[node name="DeadEffect" type="Node2D" parent="."]
+script = ExtResource( 7 )
+
+[node name="TransparencyTween" type="Tween" parent="DeadEffect"]
+
+[node name="RadiusTween" type="Tween" parent="DeadEffect"]
+
+[node name="Timer" type="Timer" parent="DeadEffect"]
+one_shot = true
 [connection signal="timeout" from="AdvancingTimer" to="." method="_on_AdvancingTimer_timeout"]
+[connection signal="died" from="Player" to="." method="_on_Player_died"]
+[connection signal="dead_effect_ended" from="DeadEffect" to="." method="_on_DeadEffect_dead_effect_ended"]
+[connection signal="timeout" from="DeadEffect/Timer" to="DeadEffect" method="_on_Timer_timeout"]

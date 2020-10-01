@@ -1,4 +1,6 @@
-extends KinematicBody2D
+extends Area2D
+
+signal died
 
 export(NodePath) var look_to_path
 
@@ -14,3 +16,7 @@ func _process(delta):
 
 func toggle_thrusters(activate : bool):
 	thrusters.emitting = activate
+
+
+func _on_Player_area_entered(area):
+	emit_signal("died")
