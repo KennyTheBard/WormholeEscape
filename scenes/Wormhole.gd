@@ -12,13 +12,14 @@ onready var center : Position2D = $Center
 onready var ring_container : Node2D = $RingContainer
 onready var advancing_timer : Timer = $AdvancingTimer
 onready var player = $Player
+onready var score_label = $Score
 
 var rings : Array = []
 var advancing : bool = false
 var level : int = 1
 var player_angle : float = 180
 var game_over : bool = false
-
+var score : int = 0 setget set_score
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -56,6 +57,9 @@ func _process(delta):
 
 
 func advance():
+	# add points to score according to the level
+	set_score(score + 1 + level / 10)
+	
 	# increment level
 	level += 1
 	
@@ -108,6 +112,11 @@ func generate_ring(empty : bool = false, fixed : bool = false) -> Node2D:
 	return instance
 
 
+func set_score(new_score : int):
+	score = new_score
+	score_label.text = str(score)
+
+
 func _on_AdvancingTimer_timeout():
 	advancing = false
 	player.toggle_thrusters(false)
@@ -129,4 +138,4 @@ func _on_Player_game_over():
 
 
 func _on_Player_collected_coin():
-	pass # Replace with function body.
+	set_score(score + 1 + level / 20)

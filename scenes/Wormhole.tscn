@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Wormhole.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/star_04.png" type="Texture" id=4]
 [ext_resource path="res://assets/star_06.png" type="Texture" id=5]
 [ext_resource path="res://scenes/Center.gd" type="Script" id=6]
+[ext_resource path="res://assets/BasicFont42.tres" type="DynamicFont" id=7]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -94,6 +95,17 @@ texture = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 look_to_path = NodePath("../Center")
+
+[node name="Score" type="Label" parent="."]
+margin_left = 22.0
+margin_top = 17.0
+margin_right = 240.0
+margin_bottom = 90.0
+custom_fonts/font = ExtResource( 7 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="tween_completed" from="Center/ScaleUpTween" to="Center" method="_on_ScaleUpTween_tween_completed"]
 [connection signal="tween_completed" from="Center/ScaleDownTween" to="Center" method="_on_ScaleDownTween_tween_completed"]
 [connection signal="timeout" from="AdvancingTimer" to="." method="_on_AdvancingTimer_timeout"]
