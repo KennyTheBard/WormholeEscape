@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/ship.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.gd" type="Script" id=2]
+[ext_resource path="res://scenes/DeadEffect.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.7237
@@ -42,4 +43,7 @@ amount = 100
 visibility_rect = Rect2( -200, -100, 200, 200 )
 local_coords = false
 process_material = SubResource( 4 )
+
+[node name="DeadEffect" parent="." instance=ExtResource( 3 )]
 [connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
+[connection signal="dead_effect_ended" from="DeadEffect" to="." method="_on_DeadEffect_dead_effect_ended"]

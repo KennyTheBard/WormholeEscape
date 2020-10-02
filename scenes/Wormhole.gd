@@ -12,7 +12,6 @@ onready var center : Position2D = $Center
 onready var ring_container : Node2D = $RingContainer
 onready var advancing_timer : Timer = $AdvancingTimer
 onready var player = $Player
-onready var dead_effect = $DeadEffect
 
 var rings : Array = []
 var advancing : bool = false
@@ -123,10 +122,11 @@ func toggle_rings_rotation(active : bool):
 func _on_Player_died():
 	game_over = true
 	toggle_rings_rotation(false)
-	player.visible = false
-	dead_effect.global_position = player.global_position
-	dead_effect.play_effect()
 
 
-func _on_DeadEffect_dead_effect_ended():
+func _on_Player_game_over():
 	print("GAME OVER")
+
+
+func _on_Player_collected_coin():
+	pass # Replace with function body.
