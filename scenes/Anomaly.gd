@@ -5,6 +5,8 @@ onready var scale_up_tween : Tween = $ScaleUpTween
 onready var rotation_tween : Tween = $RotationTween
 onready var sprite : Sprite = $Star
 
+var angle_on_ring : float = 0
+
 func _ready():
 	rotation_tween.interpolate_property(sprite, "rotation", 0, 2 * PI, 5)
 	rotation_tween.start()

@@ -1,6 +1,7 @@
 extends Area2D
 
 signal died
+signal collected_coin
 
 export(NodePath) var look_to_path
 
@@ -19,4 +20,9 @@ func toggle_thrusters(activate : bool):
 
 
 func _on_Player_area_entered(area):
-	emit_signal("died")
+	if area.get_collision_layer_bit(2):
+		emit_signal("died")
+	
+	if area.get_collision_layer_bit(3):
+		emit_signal("collected_coin")
+		area.queue_free()

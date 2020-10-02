@@ -73,6 +73,10 @@ texture = ExtResource( 5 )
 repeat = true
 playback/repeat = true
 
+[node name="ScaleUpTween" type="Tween" parent="Center"]
+
+[node name="ScaleDownTween" type="Tween" parent="Center"]
+
 [node name="RingContainer" type="Node2D" parent="."]
 
 [node name="AdvancingTimer" type="Timer" parent="."]
@@ -101,6 +105,8 @@ script = ExtResource( 7 )
 
 [node name="Timer" type="Timer" parent="DeadEffect"]
 one_shot = true
+[connection signal="tween_completed" from="Center/ScaleUpTween" to="Center" method="_on_ScaleUpTween_tween_completed"]
+[connection signal="tween_completed" from="Center/ScaleDownTween" to="Center" method="_on_ScaleDownTween_tween_completed"]
 [connection signal="timeout" from="AdvancingTimer" to="." method="_on_AdvancingTimer_timeout"]
 [connection signal="died" from="Player" to="." method="_on_Player_died"]
 [connection signal="dead_effect_ended" from="DeadEffect" to="." method="_on_DeadEffect_dead_effect_ended"]

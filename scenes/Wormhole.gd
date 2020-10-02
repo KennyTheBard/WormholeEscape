@@ -25,8 +25,11 @@ var game_over : bool = false
 func _ready():
 	var radius = initial_radius
 	for i in range(num_rings):
-		# create empty ring instance
-		var instance = generate_ring(ring_index <= i)
+		# create ring instances
+		# first ring after the ring the player starts on should be empty,
+		# but not fixed, otherwise the player might be spawned with a bomb
+		# on the next position and with no possibility to dodge it
+		var instance = generate_ring(ring_index <= i + 1, ring_index <= i)
 		instance.radius = radius
 		radius *= radius_increase_factor
 		
@@ -75,7 +78,7 @@ func advance():
 	toggle_rings_rotation(false)
 
 
-func generate_ring(empty : bool = false) -> Node2D:
+func generate_ring(empty : bool = false, fixed : bool = false) -> Node2D:
 	# create new instance
 	var instance = ring_scene.instance()
 	instance.global_position = center.global_position
@@ -88,6 +91,14 @@ func generate_ring(empty : bool = false) -> Node2D:
 			bombs += [randi() % 360]
 		instance.create_bombs(bombs)
 		
+		# randomly populate the ring with coins
+		var num_coins = round(rand_range(0, 3))
+		var coins = []
+		for _i in range(num_coins):
+			coins += [randi() % 360]
+		instance.create_coins(coins)
+	
+	if not fixed:
 		# randomly set rotation speed and direction
 		var max_rotation_speed = 60 + level
 		var min_rotation_speed = 30

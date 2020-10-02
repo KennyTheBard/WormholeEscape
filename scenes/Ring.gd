@@ -4,15 +4,34 @@ export(int) var point_count = 10000
 export(float) var scaling_factor = 0.0035
 
 onready var radius_tween : Tween = $RadiusTween
+onready var bomb_container : Node2D = $BombContainer
+onready var coin_container : Node2D = $CoinContainer
 
 const bomb_scene = preload("res://scenes/Bomb.tscn")
+const coin_scene = preload("res://scenes/Coin.tscn")
 
 var radius : float = 8 setget set_radius
 var ring_rotation : float = 0
 var ring_rotation_ps : float = 0
 var rotating : bool = true
 
-var bombs : Dictionary = {}
+var bombs : Array = []
+var coins : Array = []
+
+
+func _ready():
+	# migrate bombs from scrip memory to the scene tree
+	for bomb in bombs:
+		bomb_container.add_child(bomb)
+	bombs = []
+	
+	# migrate coins from scrip memory to the scene tree
+	for coin in coins:
+		coin_container.add_child(coin)
+	coins = []
+	
+	# make an initial update
+	update_props()
 
 
 func _process(delta):
@@ -28,9 +47,15 @@ func _draw():
 func create_bombs(bomb_positions : Array):
 	for pos in bomb_positions:
 		var instance = bomb_scene.instance()
-		bombs[pos] = instance
-		add_child(instance)
-		update_bombs()
+		instance.angle_on_ring = pos
+		bombs.append(instance)
+
+
+func create_coins(coin_positions : Array):
+	for pos in coin_positions:
+		var instance = coin_scene.instance()
+		instance.angle_on_ring = pos
+		coins.append(instance)
 
 
 func calculate_position_on_ring(degree : float) -> Vector2:
@@ -46,11 +71,18 @@ func increase_radius(radius : float, transition_period : float = 1.0) -> void:
 
 func set_radius(new_radius : float):
 	radius = new_radius
-	update_bombs()
+	update_props()
 
 
-func update_bombs():
-	for bomb_position in bombs.keys():
-		var bomb = bombs.get(bomb_position)
-		bomb.position = calculate_position_on_ring(bomb_position)
-		bomb.scale = Vector2(radius * scaling_factor, radius * scaling_factor)
+func update_props():
+	# make sure to only execute if the node is inside the scene tree
+	if is_inside_tree():
+		# update each bomb
+		for bomb in bomb_container.get_children():
+			bomb.position = calculate_position_on_ring(bomb.angle_on_ring)
+			bomb.scale = Vector2(radius * scaling_factor, radius * scaling_factor)
+			
+		# update each coin
+		for coin in coin_container.get_children():
+			coin.position = calculate_position_on_ring(coin.angle_on_ring)
+			coin.scale = Vector2(radius * scaling_factor, radius * scaling_factor)
