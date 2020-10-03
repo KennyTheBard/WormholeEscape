@@ -4,7 +4,7 @@ export(int) var num_rings = 20
 export(float) var advancing_period = 1
 export(float) var radius_increase_factor = 1.35
 export(float) var initial_radius = 8
-export(int) var ring_index = 12
+export(int) var ring_index = 14
 
 onready var ring_scene : PackedScene = preload("res://scenes/Ring.tscn")
 
@@ -23,6 +23,13 @@ var score : int = 0 setget set_score
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# center elements in the middle of the screen
+	var rect = get_viewport().get_visible_rect()
+	var center_position = rect.position + rect.size / 2
+	$Center.global_position = center_position
+	$Stars.global_position = center_position
+#	$RingContainer.global_position = center_position
+	
 	var radius = initial_radius
 	for i in range(num_rings):
 		# create ring instances
