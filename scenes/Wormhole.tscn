@@ -104,6 +104,13 @@ text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PlayerAngle" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="tween_completed" from="Center/ScaleUpTween" to="Center" method="_on_ScaleUpTween_tween_completed"]
 [connection signal="tween_completed" from="Center/ScaleDownTween" to="Center" method="_on_ScaleDownTween_tween_completed"]
 [connection signal="timeout" from="AdvancingTimer" to="." method="_on_AdvancingTimer_timeout"]

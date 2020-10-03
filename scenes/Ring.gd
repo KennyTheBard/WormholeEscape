@@ -6,6 +6,7 @@ export(float) var scaling_factor = 0.0035
 onready var radius_tween : Tween = $RadiusTween
 onready var bomb_container : Node2D = $BombContainer
 onready var coin_container : Node2D = $CoinContainer
+onready var rotation_label : Label = $RotationLabel
 
 const bomb_scene = preload("res://scenes/Bomb.tscn")
 const coin_scene = preload("res://scenes/Coin.tscn")
@@ -38,6 +39,15 @@ func _process(delta):
 	if rotating:
 		ring_rotation = int(ring_rotation + delta * ring_rotation_ps) % 360
 	update()
+	
+	# debug label
+	if debug.is_active():
+		rotation_label.visible = true
+		rotation_label.text = str(int(ring_rotation_ps))
+		rotation_label.margin_left = radius + 10
+		rotation_label.margin_right = radius + 40
+	else:
+		rotation_label.visible = false
 
 
 func _draw():

@@ -53,9 +53,9 @@ func _process(delta):
 	# calculate angle position of player and update angle position
 	var curr_ring = rings[ring_index]
 	if curr_ring.rotating:
-		player_angle = int(player_angle + delta * curr_ring.ring_rotation_ps) % 360
-	var relative_position : Vector2 = curr_ring.calculate_position_on_ring(player_angle)
-	player.global_position = center.global_position + relative_position
+		player_angle += delta * curr_ring.ring_rotation_ps
+		var relative_position : Vector2 = curr_ring.calculate_position_on_ring(player_angle)
+		player.global_position = center.global_position + relative_position
 	
 	# advance on key pressed
 	if Input.is_action_just_pressed("advance") and not game_over:
@@ -127,7 +127,8 @@ func set_score(new_score : int):
 func _on_AdvancingTimer_timeout():
 	advancing = false
 	player.toggle_thrusters(false)
-	toggle_rings_rotation(true)
+	if not game_over:
+		toggle_rings_rotation(true)
 
 
 func toggle_rings_rotation(active : bool):
