@@ -107,6 +107,14 @@ func generate_ring(empty : bool = false, fixed : bool = false) -> Node2D:
 		for _i in range(num_coins):
 			coins += [randi() % 360]
 		instance.create_coins(coins)
+		
+		# randomly populate the ring with walls
+		var num_walls = round(rand_range(1, 2))
+		var walls : Dictionary = {}
+		for _i in range(num_walls):
+			var pos = randi() % 360
+			walls[pos] = pos + 20
+		instance.create_walls(walls)
 	
 	if not fixed:
 		# randomly set rotation speed and direction
@@ -139,6 +147,7 @@ func toggle_rings_rotation(active : bool):
 func _on_Player_died():
 	game_over = true
 	toggle_rings_rotation(false)
+	player.toggle_thrusters(false)
 
 
 func _on_Player_game_over():

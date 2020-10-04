@@ -12,6 +12,8 @@ script = ExtResource( 1 )
 
 [node name="CoinContainer" type="Node2D" parent="."]
 
+[node name="WallContainer" type="Node2D" parent="."]
+
 [node name="RotationLabel" type="Label" parent="."]
 visible = false
 margin_right = 40.0

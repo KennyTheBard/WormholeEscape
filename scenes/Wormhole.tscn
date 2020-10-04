@@ -84,10 +84,10 @@ one_shot = true
 [node name="Stars" type="Particles2D" parent="."]
 scale = Vector2( 2, 2 )
 amount = 500
-lifetime = 1.6
+lifetime = 2.4
 preprocess = 5.0
 speed_scale = 0.75
-visibility_rect = Rect2( -250, -150, 500, 300 )
+visibility_rect = Rect2( -500, -300, 1000, 600 )
 process_material = SubResource( 7 )
 texture = ExtResource( 3 )
 
@@ -101,13 +101,6 @@ margin_right = 240.0
 margin_bottom = 90.0
 custom_fonts/font = ExtResource( 7 )
 text = "0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PlayerAngle" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
