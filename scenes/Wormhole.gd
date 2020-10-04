@@ -23,6 +23,7 @@ var level : int = 1
 var player_angle : float = 180
 var game_over : bool = false
 var can_restart : bool = false
+var paused : bool = false
 var score : int = 0 setget set_score
 var highscore : int = 0
 
@@ -31,6 +32,7 @@ var highscore : int = 0
 func _ready():
 	# hide gameover screen
 	$GameOver.visible = false
+	$Paused.visible = false
 	can_restart = false
 	
 	# initial background color
@@ -65,8 +67,22 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# pause menu
+	if Input.is_action_just_pressed("pause") and not game_over:
+		if paused:
+			get_tree().quit()
+		else:
+			paused = true
+			toggle_rings_rotation(false)
+			$Paused.visible = true
+	if Input.is_action_just_pressed("advance") and paused:
+		paused = false
+		$Paused.visible = false
+		toggle_rings_rotation(true)
+		return
+	
 	# while advancing ignore everything
-	if advancing:
+	if advancing or paused:
 		return
 	
 	# calculate angle position of player and update angle position
@@ -77,10 +93,11 @@ func _process(delta):
 		player.global_position = center.global_position + relative_position
 	
 	# advance on key pressed
-	if Input.is_action_just_pressed("advance") and not game_over:
+	if Input.is_action_just_pressed("advance") and not (game_over or paused):
 		advancing = true
 		advance()
 	
+	# restart
 	if Input.is_action_just_pressed("advance") and can_restart:
 		get_tree().reload_current_scene()
 
