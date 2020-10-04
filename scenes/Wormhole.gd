@@ -21,14 +21,19 @@ var advancing : bool = false
 var level : int = 1
 var player_angle : float = 180
 var game_over : bool = false
+var can_restart : bool = false
 var score : int = 0 setget set_score
 var highscore : int = 0
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# hide gameover screen
+	$GameOver.visible = false
+	can_restart = false
+	
 	# initial background color
 	background.modulate = rand_color(10.0/255, 40.0/255)
-	print(background.modulate)
 	
 	# load highscore
 	highscore = save_system.load_score()
@@ -74,7 +79,9 @@ func _process(delta):
 	if Input.is_action_just_pressed("advance") and not game_over:
 		advancing = true
 		advance()
-
+	
+	if Input.is_action_just_pressed("advance") and can_restart:
+		get_tree().reload_current_scene()
 
 func advance():
 	# add points to score according to the level
@@ -164,8 +171,14 @@ func _on_Player_died():
 
 
 func _on_Player_game_over():
+	var game_over_label_text = "Score:"
 	if score > highscore:
 		save_system.save_score(score)
+		game_over_label_text = "New high score:"
+	$GameOver/ScoreLabel.text = game_over_label_text
+	$GameOver/ScoreLabel/Value.text = str(score)
+	$GameOver.visible = true
+	can_restart = true
 
 
 func _on_Player_collected_coin():
