@@ -13,6 +13,8 @@ onready var ring_container : Node2D = $RingContainer
 onready var advancing_timer : Timer = $AdvancingTimer
 onready var player = $Player
 onready var score_label = $Score/Value
+onready var background = $Background
+onready var color_tween = $Background/ColorTween
 
 var rings : Array = []
 var advancing : bool = false
@@ -24,6 +26,10 @@ var highscore : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# initial background color
+	background.modulate = rand_color(10.0/255, 40.0/255)
+	print(background.modulate)
+	
 	# load highscore
 	highscore = save_system.load_score()
 	if highscore > 0:
@@ -49,6 +55,7 @@ func _ready():
 		# add rings to the scene
 		rings.push_back(instance)
 		ring_container.add_child(instance)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -163,3 +170,16 @@ func _on_Player_game_over():
 
 func _on_Player_collected_coin():
 	set_score(score + 1 + level / 20)
+
+
+func _on_ColorTimer_timeout():
+	var next_color : Color = rand_color(10.0/255, 40.0/255)
+	color_tween.interpolate_property(background, "modulate", background.modulate, next_color, 1.2)
+	color_tween.start()
+
+
+func rand_color(start_interval : float = 0, end_interval : float = 1) -> Color:
+	return Color(
+		rand_range(start_interval, end_interval),
+		rand_range(start_interval, end_interval),
+		rand_range(start_interval, end_interval))
