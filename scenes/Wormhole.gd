@@ -4,6 +4,7 @@ export(int) var num_rings = 20
 export(float) var advancing_period = 1
 export(float) var radius_increase_factor = 1.35
 export(float) var initial_radius = 8
+export(float) var minimum_distance = 25
 export(int) var ring_index = 14
 
 onready var ring_scene : PackedScene = preload("res://scenes/Ring.tscn")
@@ -114,18 +115,28 @@ func generate_ring(empty : bool = false, fixed : bool = false) -> Node2D:
 	instance.global_position = center.global_position
 	
 	if not empty:
+		var static_elements = []
+		
 		# randomly populate the ring with bombs
 		var num_bombs = level / 25 + round(rand_range(0, level / 50 + 2))
 		var bombs = []
-		for _i in range(num_bombs):
-			bombs += [randi() % 360]
+		while bombs.size() < num_bombs:
+			var pos = randi() % 360
+			if not enough_minimum_distance(pos, static_elements, minimum_distance):
+				continue
+			bombs += [pos]
+			static_elements += [pos]
 		instance.create_bombs(bombs)
 		
 		# randomly populate the ring with coins
 		var num_coins = round(rand_range(0, 3))
 		var coins = []
-		for _i in range(num_coins):
-			coins += [randi() % 360]
+		while coins.size() < num_coins:
+			var pos = randi() % 360
+			if not enough_minimum_distance(pos, static_elements, minimum_distance):
+				continue
+			coins += [pos]
+			static_elements += [pos]
 		instance.create_coins(coins)
 		
 		# randomly populate the ring with walls
@@ -145,6 +156,13 @@ func generate_ring(empty : bool = false, fixed : bool = false) -> Node2D:
 	
 	# return configurated instance
 	return instance
+
+
+func enough_minimum_distance(pos : float, elements : Array, minimum_distance : float) -> bool:
+	for e in elements:
+		if abs(e - pos) < minimum_distance:
+			return false
+	return true
 
 
 func set_score(new_score : int):
