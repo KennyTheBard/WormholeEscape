@@ -23,6 +23,7 @@ config/icon="res://assets/icon.png"
 
 init="*res://autoload/init.gd"
 debug="*res://autoload/debug.gd"
+save_system="*res://autoload/save_system.gd"
 
 [display]
 

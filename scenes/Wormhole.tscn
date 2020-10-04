@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/Wormhole.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/star_06.png" type="Texture" id=5]
 [ext_resource path="res://scenes/Center.gd" type="Script" id=6]
 [ext_resource path="res://assets/BasicFont42.tres" type="DynamicFont" id=7]
+[ext_resource path="res://assets/BasicFont24.tres" type="DynamicFont" id=8]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -99,6 +100,40 @@ margin_left = 22.0
 margin_top = 17.0
 margin_right = 240.0
 margin_bottom = 90.0
+custom_fonts/font = ExtResource( 8 )
+text = "Score:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="Score"]
+margin_left = -1.29236
+margin_top = 32.1978
+margin_right = 216.708
+margin_bottom = 105.198
+custom_fonts/font = ExtResource( 7 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Highscore" type="Label" parent="."]
+visible = false
+margin_left = 20.7076
+margin_top = 122.198
+margin_right = 308.708
+margin_bottom = 195.198
+custom_fonts/font = ExtResource( 8 )
+text = "highscore:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="Highscore"]
+margin_left = -0.400002
+margin_top = 34.2293
+margin_right = 217.6
+margin_bottom = 107.229
 custom_fonts/font = ExtResource( 7 )
 text = "0"
 __meta__ = {

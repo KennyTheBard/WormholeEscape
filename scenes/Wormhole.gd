@@ -12,7 +12,7 @@ onready var center : Position2D = $Center
 onready var ring_container : Node2D = $RingContainer
 onready var advancing_timer : Timer = $AdvancingTimer
 onready var player = $Player
-onready var score_label = $Score
+onready var score_label = $Score/Value
 
 var rings : Array = []
 var advancing : bool = false
@@ -20,15 +20,21 @@ var level : int = 1
 var player_angle : float = 180
 var game_over : bool = false
 var score : int = 0 setget set_score
+var highscore : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# load highscore
+	highscore = save_system.load_score()
+	if highscore > 0:
+		$Highscore.visible = true
+		$Highscore/Value.text = str(highscore)
+	
 	# center elements in the middle of the screen
 	var rect = get_viewport().get_visible_rect()
 	var center_position = rect.position + rect.size / 2
 	$Center.global_position = center_position
 	$Stars.global_position = center_position
-#	$RingContainer.global_position = center_position
 	
 	var radius = initial_radius
 	for i in range(num_rings):
@@ -151,7 +157,8 @@ func _on_Player_died():
 
 
 func _on_Player_game_over():
-	print("GAME OVER")
+	if score > highscore:
+		save_system.save_score(score)
 
 
 func _on_Player_collected_coin():
