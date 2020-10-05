@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://props/Stars.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/BasicFont128.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/BasicFont64.tres" type="DynamicFont" id=3]
 [ext_resource path="res://menu/MainMenu.gd" type="Script" id=4]
 [ext_resource path="res://assets/BasicFont42.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/BasicFont24.tres" type="DynamicFont" id=6]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -29,6 +30,7 @@ margin_bottom = 1109.91
 texture = SubResource( 2 )
 expand = true
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -47,57 +49,7 @@ text = "Wormhole Escape"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Brightness" type="Label" parent="."]
-margin_top = 244.0
-margin_right = 947.0
-margin_bottom = 511.0
-custom_fonts/font = ExtResource( 5 )
-text = "Are the stars distracting?
-Lower their brightness:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BrightnessSlider" type="HSlider" parent="."]
-margin_left = 76.9523
-margin_top = 474.08
-margin_right = 855.952
-margin_bottom = 526.08
-max_value = 1.0
-step = 0.01
-value = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sound" type="Label" parent="."]
-margin_left = 960.0
-margin_top = 244.0
-margin_right = 1915.0
-margin_bottom = 511.0
-custom_fonts/font = ExtResource( 5 )
-text = "Is the sound too loud?
-Lower the volume:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SoundSlider" type="HSlider" parent="."]
-margin_left = 1074.59
-margin_top = 474.08
-margin_right = 1848.59
-margin_bottom = 529.08
-max_value = 1.0
-step = 0.01
-value = 1.0
-__meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -105,9 +57,9 @@ __meta__ = {
 one_shot = true
 
 [node name="SpaceLabel" type="Label" parent="."]
-margin_left = -14.0
+margin_left = 959.0
 margin_top = 636.0
-margin_right = 1930.0
+margin_right = 1927.0
 margin_bottom = 805.0
 custom_fonts/font = ExtResource( 3 )
 text = "Press \"SPACE\" to play"
@@ -118,7 +70,7 @@ __meta__ = {
 }
 
 [node name="EscLabel" type="Label" parent="."]
-margin_left = -11.0
+margin_left = 962.0
 margin_top = 797.0
 margin_right = 1920.0
 margin_bottom = 985.0
@@ -126,6 +78,147 @@ custom_fonts/font = ExtResource( 3 )
 text = "Press \"ESC\" to quit"
 align = 1
 valign = 1
-[connection signal="value_changed" from="BrightnessSlider" to="." method="_on_BrightnessSlider_value_changed"]
-[connection signal="value_changed" from="SoundSlider" to="." method="_on_SoundSlider_value_changed"]
+
+[node name="Brightness" type="Control" parent="."]
+margin_left = 20.3022
+margin_top = 238.7
+margin_right = 891.302
+margin_bottom = 600.7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Brightness"]
+margin_top = 4.26483
+margin_right = 947.0
+margin_bottom = 271.265
+custom_fonts/font = ExtResource( 5 )
+text = "Are the stars distracting?
+Lower their brightness:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="BrightnessSlider" type="HSlider" parent="Brightness"]
+margin_left = 76.9523
+margin_top = 234.345
+margin_right = 855.952
+margin_bottom = 286.345
+max_value = 1.0
+step = 0.01
+value = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="Brightness"]
+margin_left = 89.0
+margin_top = 294.0
+margin_right = 849.0
+margin_bottom = 358.0
+custom_fonts/font = ExtResource( 6 )
+align = 1
+
+[node name="Sound" type="Control" parent="."]
+margin_left = 959.0
+margin_top = 239.0
+margin_right = 1881.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Sound"]
+margin_left = -7.26276
+margin_top = -2.45331
+margin_right = 947.737
+margin_bottom = 264.547
+custom_fonts/font = ExtResource( 5 )
+text = "Is the sound too loud?
+Lower the volume:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SoundSlider" type="HSlider" parent="Sound"]
+margin_left = 107.326
+margin_top = 227.627
+margin_right = 881.326
+margin_bottom = 282.627
+max_value = 1.0
+step = 0.01
+value = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="Sound"]
+margin_left = 116.531
+margin_top = 293.7
+margin_right = 876.531
+margin_bottom = 357.7
+custom_fonts/font = ExtResource( 6 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Difficulty" type="Control" parent="."]
+margin_top = 636.0
+margin_right = 949.0
+margin_bottom = 949.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Difficulty"]
+margin_left = 5.30005
+margin_top = -0.00848389
+margin_right = 952.3
+margin_bottom = 266.992
+custom_fonts/font = ExtResource( 5 )
+text = "I sthe game too fast?
+Lower their speed:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="DifficultySlider" type="HSlider" parent="Difficulty"]
+margin_left = 82.2523
+margin_top = 230.072
+margin_right = 861.252
+margin_bottom = 282.072
+min_value = 1.0
+max_value = 3.0
+step = 1.0
+value = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="Difficulty"]
+margin_left = 103.607
+margin_top = 301.913
+margin_right = 863.607
+margin_bottom = 365.913
+custom_fonts/font = ExtResource( 6 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="value_changed" from="Brightness/BrightnessSlider" to="." method="_on_BrightnessSlider_value_changed"]
+[connection signal="value_changed" from="Sound/SoundSlider" to="." method="_on_SoundSlider_value_changed"]
+[connection signal="value_changed" from="Difficulty/DifficultySlider" to="." method="_on_DifficultySlider_value_changed"]

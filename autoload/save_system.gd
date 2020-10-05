@@ -25,7 +25,8 @@ func save_settings():
 	file.open("user://" + settings_filename, File.WRITE)
 	var data = JSON.print({
 		"star_brightness": settings.star_brightness,
-		"master_volume": settings.master_volume
+		"master_volume": settings.master_volume,
+		"difficulty": settings.difficulty
 	})
 	file.store_line(data)
 	file.close()
@@ -35,6 +36,7 @@ func load_settings():
 	var file = File.new()
 	if file.open("user://" + settings_filename, File.READ) == OK:
 		var data = JSON.parse(file.get_line())
-		settings.star_brightness = data.result["star_brightness"]
-		settings.master_volume = data.result["master_volume"]
+		settings.star_brightness = data.result.get("star_brightness", 1)
+		settings.master_volume = data.result.get("master_volume", 1)
+		settings.difficulty = data.result.get("difficulty", settings.NORMAL)
 		file.close()
