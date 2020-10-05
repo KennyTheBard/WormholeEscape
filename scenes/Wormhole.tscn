@@ -60,6 +60,7 @@ text = "Highscore:"
 [node name="GameOver" parent="." instance=ExtResource( 5 )]
 
 [node name="Paused" parent="." instance=ExtResource( 6 )]
+visible = true
 [connection signal="timeout" from="Background/ColorTimer" to="." method="_on_ColorTimer_timeout"]
 [connection signal="timeout" from="AdvancingTimer" to="." method="_on_AdvancingTimer_timeout"]
 [connection signal="collected_coin" from="Player" to="." method="_on_Player_collected_coin"]

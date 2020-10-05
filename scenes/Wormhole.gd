@@ -8,6 +8,7 @@ export(float) var minimum_distance = 25
 export(int) var ring_index = 14
 
 onready var ring_scene : PackedScene = preload("res://scenes/Ring.tscn")
+onready var main_menu_scene : PackedScene = load("res://menu/MainMenu.tscn")
 
 onready var center : Position2D = $Center
 onready var ring_container : Node2D = $RingContainer
@@ -70,7 +71,7 @@ func _process(delta):
 	# pause menu
 	if Input.is_action_just_pressed("pause") and not game_over:
 		if paused:
-			get_tree().quit()
+			get_tree().change_scene_to(main_menu_scene)
 		else:
 			paused = true
 			toggle_rings_rotation(false)
@@ -103,7 +104,7 @@ func _process(delta):
 
 func advance():
 	# add points to score according to the level
-	set_score(score + 1 + level / 10)
+	set_score(score + 1 + level / 10 + (settings.difficulty - 1))
 	
 	# increment level
 	level += 1
@@ -166,10 +167,10 @@ func generate_ring(empty : bool = false, fixed : bool = false) -> Node2D:
 	
 	if not fixed:
 		# randomly set rotation speed and direction
-		var max_rotation_speed = 60 + level
-		var min_rotation_speed = 30
-		var rotation_direction_sign = 1 if randi() % 2 == 0 else -1
-		instance.ring_rotation_ps = rotation_direction_sign * rand_range(min_rotation_speed, max_rotation_speed)
+		var rotation_speed = rand_range(30, 60 + level)
+		var direction = 1 if randi() % 2 == 0 else -1
+		var difficulty_modifier =  settings.get_difficulty_modifier()
+		instance.ring_rotation_ps = direction * rotation_speed * difficulty_modifier
 	
 	# return configurated instance
 	return instance

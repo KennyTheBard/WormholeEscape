@@ -11,6 +11,9 @@ onready var sound_label : Label = $Sound/Value
 onready var difficulty_slider : HSlider = $Difficulty/DifficultySlider
 onready var difficulty_label : Label = $Difficulty/Value
 
+# because the fact that preloading is done at compilation,
+# you cannot preload cyclic dependencies
+onready var wormhole_scene : PackedScene = load("res://scenes/Wormhole.tscn")
 
 func _ready():
 	save_system.load_settings()
@@ -21,8 +24,10 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_pressed("advance"):
-		get_tree().change_scene_to(load("res://scenes/Wormhole.tscn"))
+		save_system.save_settings()
+		get_tree().change_scene_to(wormhole_scene)
 	if Input.is_action_just_pressed("pause"):
+		save_system.save_settings()
 		get_tree().quit()
 
 
