@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/BasicFont24.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/BasicFont42.tres" type="DynamicFont" id=2]
+
+[node name="Score" type="Label"]
+margin_left = 22.0
+margin_top = 17.0
+margin_right = 240.0
+margin_bottom = 90.0
+custom_fonts/font = ExtResource( 1 )
+text = "Score:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="."]
+margin_left = -1.29236
+margin_top = 32.1978
+margin_right = 216.708
+margin_bottom = 105.198
+custom_fonts/font = ExtResource( 2 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,0 +1,131 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://props/Stars.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/BasicFont128.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/BasicFont64.tres" type="DynamicFont" id=3]
+[ext_resource path="res://menu/MainMenu.gd" type="Script" id=4]
+[ext_resource path="res://assets/BasicFont42.tres" type="DynamicFont" id=5]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 0.0784314, 0.0784314, 0.0784314, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -14.0454
+margin_top = -28.0906
+margin_right = 1958.95
+margin_bottom = 1109.91
+texture = SubResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftStars" parent="." instance=ExtResource( 1 )]
+position = Vector2( -55.9231, 563.747 )
+
+[node name="RightStars" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1958.95, 547.769 )
+
+[node name="Title" type="Label" parent="."]
+margin_top = -34.0
+margin_right = 1915.0
+margin_bottom = 322.0
+custom_fonts/font = ExtResource( 2 )
+text = "Wormhole Escape"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Brightness" type="Label" parent="."]
+margin_top = 244.0
+margin_right = 947.0
+margin_bottom = 511.0
+custom_fonts/font = ExtResource( 5 )
+text = "Are the stars distracting?
+Lower their brightness:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BrightnessSlider" type="HSlider" parent="."]
+margin_left = 76.9523
+margin_top = 474.08
+margin_right = 855.952
+margin_bottom = 526.08
+max_value = 1.0
+step = 0.01
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sound" type="Label" parent="."]
+margin_left = 960.0
+margin_top = 244.0
+margin_right = 1915.0
+margin_bottom = 511.0
+custom_fonts/font = ExtResource( 5 )
+text = "Is the sound too loud?
+Lower the volume:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SoundSlider" type="HSlider" parent="."]
+margin_left = 1074.59
+margin_top = 474.08
+margin_right = 1848.59
+margin_bottom = 529.08
+max_value = 1.0
+step = 0.01
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpaceLabel" type="Label" parent="."]
+margin_left = -14.0
+margin_top = 636.0
+margin_right = 1930.0
+margin_bottom = 805.0
+custom_fonts/font = ExtResource( 3 )
+text = "Press \"SPACE\" to play"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EscLabel" type="Label" parent="."]
+margin_left = -11.0
+margin_top = 797.0
+margin_right = 1920.0
+margin_bottom = 985.0
+custom_fonts/font = ExtResource( 3 )
+text = "Press \"ESC\" to quit"
+align = 1
+valign = 1
+[connection signal="value_changed" from="BrightnessSlider" to="." method="_on_BrightnessSlider_value_changed"]
+[connection signal="value_changed" from="SoundSlider" to="." method="_on_SoundSlider_value_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

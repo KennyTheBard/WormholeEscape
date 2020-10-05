@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/little_star.png" type="Texture" id=1]
+[ext_resource path="res://props/Stars.gd" type="Script" id=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.0482315, 0.205788, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0.00898203, 0.268182 ), 0.0, 0.467133, 0, 0, Vector2( 1, 1 ), 0.0446521, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 100.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[node name="Stars" type="Particles2D"]
+scale = Vector2( 2, 2 )
+amount = 500
+lifetime = 2.4
+preprocess = 5.0
+speed_scale = 0.75
+visibility_rect = Rect2( -500, -300, 1000, 600 )
+process_material = SubResource( 5 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

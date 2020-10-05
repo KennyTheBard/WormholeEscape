@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/star_06.png" type="Texture" id=1]
+[ext_resource path="res://assets/star_04.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Center.gd" type="Script" id=3]
+
+[node name="Center" type="Position2D"]
+script = ExtResource( 3 )
+
+[node name="Clockwise" type="Sprite" parent="."]
+scale = Vector2( 1.24551, 1.24551 )
+texture = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="Clockwise"]
+repeat = true
+playback/repeat = true
+
+[node name="CounterClockwise" type="Sprite" parent="."]
+scale = Vector2( 0.237613, 0.237613 )
+texture = ExtResource( 1 )
+
+[node name="Tween" type="Tween" parent="CounterClockwise"]
+repeat = true
+playback/repeat = true
+
+[node name="ScaleUpTween" type="Tween" parent="."]
+
+[node name="ScaleDownTween" type="Tween" parent="."]
+[connection signal="tween_completed" from="ScaleUpTween" to="." method="_on_ScaleUpTween_tween_completed"]
+[connection signal="tween_completed" from="ScaleDownTween" to="." method="_on_ScaleDownTween_tween_completed"]
