@@ -2,7 +2,7 @@ extends Control
 
 onready var timer : Timer = $Timer
 onready var brightness_slider : HSlider = $BrightnessSlider
-onready var sound_slider : HSlider = $BrightnessSlider
+onready var sound_slider : HSlider = $SoundSlider
 
 
 func _ready():
@@ -20,13 +20,11 @@ func _process(delta):
 
 func _on_BrightnessSlider_value_changed(value):
 	settings.star_brightness = value
-	print(settings.star_brightness)
 	timer.start(1)
 
 
 func _on_SoundSlider_value_changed(value):
 	settings.master_volume = value
-	print(settings.master_volume)
 	timer.start(1)
 
 
