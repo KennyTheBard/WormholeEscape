@@ -45,5 +45,14 @@ local_coords = false
 process_material = SubResource( 4 )
 
 [node name="DeadEffect" parent="." instance=ExtResource( 3 )]
+
+[node name="RadiusTween" type="Tween" parent="."]
+
+[node name="RotationTween" type="Tween" parent="."]
+repeat = true
+playback/repeat = true
+
+[node name="ColorTween" type="Tween" parent="."]
 [connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
 [connection signal="dead_effect_ended" from="DeadEffect" to="." method="_on_DeadEffect_dead_effect_ended"]
+[connection signal="tween_completed" from="RadiusTween" to="." method="_on_RadiusTween_tween_completed"]

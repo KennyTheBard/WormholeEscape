@@ -203,7 +203,6 @@ margin_right = 861.252
 margin_bottom = 282.072
 min_value = 1.0
 max_value = 3.0
-step = 1.0
 value = 1.0
 __meta__ = {
 "_edit_lock_": true,
