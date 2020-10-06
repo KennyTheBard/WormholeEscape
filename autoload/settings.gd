@@ -7,7 +7,7 @@ enum {
 }
 
 var star_brightness : float = 1
-var master_volume : float = 1
+var master_volume : float = 1 setget set_master_volume
 var difficulty : int = NORMAL
 
 
@@ -18,3 +18,8 @@ func get_difficulty_modifier() -> float:
 		return 1.0
 	else :
 		return 1.5
+
+
+func set_master_volume(value : float):
+	master_volume = value
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -52.0 * (1.0 - value) * (1.0 - value))
