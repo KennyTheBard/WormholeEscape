@@ -204,6 +204,7 @@ func _on_Player_died():
 	game_over = true
 	toggle_rings_rotation(false)
 	player.toggle_thrusters(false)
+	$ExplosionSound.play()
 
 
 func _on_Player_game_over():
@@ -219,6 +220,7 @@ func _on_Player_game_over():
 
 func _on_Player_collected_coin():
 	set_score(score + 1 + level / 20)
+	$CoinSound.play()
 
 
 func _on_ColorTimer_timeout():

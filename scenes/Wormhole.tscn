@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Wormhole.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://menu/GameOver.tscn" type="PackedScene" id=5]
 [ext_resource path="res://menu/Paused.tscn" type="PackedScene" id=6]
 [ext_resource path="res://props/Center.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/explosion.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/collect_coin.wav" type="AudioStream" id=9]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -61,6 +63,12 @@ text = "Highscore:"
 
 [node name="Paused" parent="." instance=ExtResource( 6 )]
 visible = true
+
+[node name="CoinSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
 [connection signal="timeout" from="Background/ColorTimer" to="." method="_on_ColorTimer_timeout"]
 [connection signal="timeout" from="AdvancingTimer" to="." method="_on_AdvancingTimer_timeout"]
 [connection signal="collected_coin" from="Player" to="." method="_on_Player_collected_coin"]
