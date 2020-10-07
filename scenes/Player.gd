@@ -15,11 +15,10 @@ onready var radius_tween : Tween = $RadiusTween
 onready var rotation_tween : Tween = $RotationTween
 onready var color_tween : Tween = $ColorTween
 
-var draw_target : bool = true
 var target_radius : float = 100
 var target_rotation : float = randf()
 var color : Color
-
+var died : bool = false
 
 func _ready():
 	radius_tween.interpolate_property(self, "target_radius", 500, 50, 1.25,
@@ -35,20 +34,10 @@ func _ready():
 	color_tween.start()
 
 
-func _on_RadiusTween_tween_completed(object, key):
-	radius_tween.interpolate_property(self, "target_radius", 50, 500, 1.25,
-		Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.25)
-	radius_tween.start()
-	
-	color_tween.interpolate_property(self, "color", Color(0, 0.75, 0.75, 1),
-		Color(0, 0.75, 0.75, 0), 0.15, Tween.TRANS_LINEAR, Tween.EASE_OUT, 1.25)
-	color_tween.start()
-	
-	yield(radius_tween, "tween_completed")
-	draw_target = false
-
-
 func _draw():
+	if died:
+		return
+	
 	draw_arc(Vector2(), target_radius,
 		0 + target_rotation, PI - deg2rad(45) + target_rotation,
 		200, color, 1, true)
@@ -58,8 +47,7 @@ func _draw():
 
 
 func _process(delta):
-	if draw_target:
-		update()
+	update()
 	if look_to:
 		var angle = look_to.global_position.angle_to_point(global_position)
 		rotation = angle
@@ -67,14 +55,27 @@ func _process(delta):
 
 func toggle_thrusters(activate : bool):
 	thrusters.emitting = activate
+	toggle_collision(activate)
+
+
+func toggle_collision(activate : bool):
+	set_collision_layer_bit(1, activate)
+	set_collision_layer_bit(2, activate)
+	set_collision_layer_bit(3, activate)
 
 
 func _on_Player_area_entered(area):
+	# destoyed ships cannot collide with other objects
+	if died:
+		return
+	
 	# wall or bomb collision
 	if area.get_collision_layer_bit(1) or area.get_collision_layer_bit(2):
 		emit_signal("died")
+		died = true
 		sprite.visible = false
 		dead_effect.play_effect()
+		toggle_thrusters(false)
 	
 	# coin collision
 	if area.get_collision_layer_bit(3):

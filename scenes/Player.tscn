@@ -33,6 +33,7 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+self_modulate = Color( 0, 1, 1, 1 )
 scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 1 )
 
@@ -55,4 +56,3 @@ playback/repeat = true
 [node name="ColorTween" type="Tween" parent="."]
 [connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
 [connection signal="dead_effect_ended" from="DeadEffect" to="." method="_on_DeadEffect_dead_effect_ended"]
-[connection signal="tween_completed" from="RadiusTween" to="." method="_on_RadiusTween_tween_completed"]
