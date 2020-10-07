@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Wormhole Escape"
-run/main_scene="res://menu/MainMenu.tscn"
+run/main_scene="res://menu/Menu.tscn"
 config/macos_native_icon="res://assets/logo_M4i_icon.ico"
 config/windows_native_icon="res://assets/logo_M4i_icon.ico"
 

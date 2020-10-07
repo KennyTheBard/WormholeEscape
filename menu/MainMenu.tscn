@@ -1,48 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://props/Stars.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/BasicFont128.tres" type="DynamicFont" id=2]
-[ext_resource path="res://assets/rabbit.png" type="Texture" id=3]
+[ext_resource path="res://assets/BasicFont64.tres" type="DynamicFont" id=3]
 [ext_resource path="res://menu/MainMenu.gd" type="Script" id=4]
-[ext_resource path="res://assets/BasicFont42.tres" type="DynamicFont" id=5]
-[ext_resource path="res://assets/BasicFont24.tres" type="DynamicFont" id=6]
-[ext_resource path="res://assets/brightness.png" type="Texture" id=7]
-[ext_resource path="res://assets/sfx.png" type="Texture" id=8]
-[ext_resource path="res://assets/music.png" type="Texture" id=9]
-[ext_resource path="res://assets/master.png" type="Texture" id=10]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0 )
-colors = PoolColorArray( 0.0784314, 0.0784314, 0.0784314, 1 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-
-[node name="MainMenu" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="MainMenu" type="Node"]
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -14.0454
-margin_top = -28.0906
-margin_right = 1958.95
-margin_bottom = 1109.91
-texture = SubResource( 2 )
-expand = true
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="LeftStars" parent="." instance=ExtResource( 1 )]
-position = Vector2( -55.9231, 563.747 )
-
-[node name="RightStars" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1958.95, 547.769 )
 
 [node name="Title" type="Label" parent="."]
 margin_top = -34.0
@@ -57,343 +20,55 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-
-[node name="SpaceLabel" type="Label" parent="."]
-margin_left = 954.261
-margin_top = 442.211
-margin_right = 2006.26
-margin_bottom = 622.211
-custom_fonts/font = ExtResource( 5 )
-text = "Press \"SPACE\" to play"
-align = 1
-valign = 1
+[node name="Play" type="Button" parent="."]
+margin_left = 836.958
+margin_top = 349.0
+margin_right = 1089.96
+margin_bottom = 489.0
+custom_fonts/font = ExtResource( 3 )
+text = "Play"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EscLabel" type="Label" parent="."]
-anchor_left = -0.00101458
-anchor_right = -0.00101458
-margin_left = 1004.34
-margin_top = 578.4
-margin_right = 1962.34
-margin_bottom = 766.4
-custom_fonts/font = ExtResource( 5 )
-text = "Press \"ESC\" to quit"
-align = 1
-valign = 1
+[node name="Settings" type="Button" parent="."]
+margin_left = 705.0
+margin_top = 489.0
+margin_right = 1217.0
+margin_bottom = 629.0
+custom_fonts/font = ExtResource( 3 )
+text = "Settings"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Brightness" type="Control" parent="."]
-margin_left = 71.7257
-margin_top = 283.356
-margin_right = 942.726
-margin_bottom = 447.356
+[node name="Credits" type="Button" parent="."]
+margin_left = 705.0
+margin_top = 629.0
+margin_right = 1217.0
+margin_bottom = 769.0
+custom_fonts/font = ExtResource( 3 )
+disabled = true
+text = "Credits"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Brightness"]
-margin_left = -3.13635
-margin_top = 13.8121
-margin_right = 943.864
-margin_bottom = 111.812
-custom_fonts/font = ExtResource( 5 )
-text = "Particles brightness"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="BrightnessSlider" type="HSlider" parent="Brightness"]
-margin_left = 73.8636
-margin_top = 101.812
-margin_right = 849.864
-margin_bottom = 117.812
-rect_scale = Vector2( 1, 3 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Value" type="Label" parent="Brightness"]
-margin_left = 846.234
-margin_top = 95.0633
-margin_right = 973.234
-margin_bottom = 159.063
-custom_fonts/font = ExtResource( 6 )
-text = "100%"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="TextureRect" type="TextureRect" parent="Brightness"]
-margin_left = -3.13635
-margin_top = 93.7827
-margin_right = 124.864
-margin_bottom = 221.783
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 7 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Master" type="Control" parent="."]
-margin_left = 32.7256
-margin_top = 421.194
-margin_right = 954.726
-margin_bottom = 584.194
+[node name="Exit" type="Button" parent="."]
+margin_left = 705.0
+margin_top = 769.0
+margin_right = 1217.0
+margin_bottom = 909.0
+custom_fonts/font = ExtResource( 3 )
+text = "Exit"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Label" type="Label" parent="Master"]
-margin_top = 9.66507
-margin_right = 955.0
-margin_bottom = 109.665
-custom_fonts/font = ExtResource( 5 )
-text = "Master volume"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="MasterSlider" type="HSlider" parent="Master"]
-margin_left = 115.833
-margin_top = 44.0424
-margin_right = 889.833
-margin_bottom = 99.0424
-rect_scale = Vector2( 1, 3 )
-max_value = 1.0
-step = 0.01
-value = 1.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Value" type="Label" parent="Master"]
-margin_left = 907.033
-margin_top = 91.9464
-margin_right = 999.033
-margin_bottom = 155.946
-custom_fonts/font = ExtResource( 6 )
-text = "100%"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="Master"]
-margin_left = 38.4838
-margin_top = 101.33
-margin_right = 166.484
-margin_bottom = 229.33
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 10 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Music" type="Control" parent="."]
-margin_left = 40.5162
-margin_top = 566.307
-margin_right = 962.516
-margin_bottom = 734.307
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Music"]
-margin_left = -6.40723
-margin_top = 3.51883
-margin_right = 948.593
-margin_bottom = 103.519
-custom_fonts/font = ExtResource( 5 )
-text = "Music volume"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="MusicSlider" type="HSlider" parent="Music"]
-margin_left = 109.426
-margin_top = 37.8962
-margin_right = 883.426
-margin_bottom = 92.8962
-rect_scale = Vector2( 1, 3 )
-max_value = 1.0
-step = 0.01
-value = 1.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Value" type="Label" parent="Music"]
-margin_left = 900.626
-margin_top = 85.8001
-margin_right = 992.626
-margin_bottom = 149.8
-custom_fonts/font = ExtResource( 6 )
-text = "100%"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="Music"]
-margin_left = 32.0765
-margin_top = 95.1842
-margin_right = 160.077
-margin_bottom = 223.184
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 9 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sound" type="Control" parent="."]
-margin_left = 36.0
-margin_top = 710.0
-margin_right = 958.0
-margin_bottom = 915.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Sound"]
-margin_left = -6.2363
-margin_top = 1.36554
-margin_right = 948.764
-margin_bottom = 101.366
-custom_fonts/font = ExtResource( 5 )
-text = "SFX volume"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="SoundSlider" type="HSlider" parent="Sound"]
-margin_left = 109.597
-margin_top = 35.7429
-margin_right = 883.597
-margin_bottom = 90.7429
-rect_scale = Vector2( 1, 3 )
-max_value = 1.0
-step = 0.01
-value = 1.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Value" type="Label" parent="Sound"]
-margin_left = 900.797
-margin_top = 83.6469
-margin_right = 992.797
-margin_bottom = 147.647
-custom_fonts/font = ExtResource( 6 )
-text = "100%"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="Sound"]
-margin_left = 32.2475
-margin_top = 93.0309
-margin_right = 160.247
-margin_bottom = 202.031
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 8 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Difficulty" type="Control" parent="."]
-margin_left = 51.7257
-margin_top = 846.242
-margin_right = 1000.73
-margin_bottom = 1020.24
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Difficulty"]
-margin_left = 5.27429
-margin_top = 9.72382
-margin_right = 952.274
-margin_bottom = 96.7238
-custom_fonts/font = ExtResource( 5 )
-text = "Game speed"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="DifficultySlider" type="HSlider" parent="Difficulty"]
-margin_left = 87.2743
-margin_top = 92.869
-margin_right = 866.274
-margin_bottom = 109.869
-rect_scale = Vector2( 1, 3 )
-min_value = 1.0
-max_value = 3.0
-value = 1.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Value" type="Label" parent="Difficulty"]
-margin_left = 850.057
-margin_top = 84.6783
-margin_right = 1046.06
-margin_bottom = 148.678
-custom_fonts/font = ExtResource( 6 )
-text = "SLOW"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="Difficulty"]
-margin_left = 13.4272
-margin_top = 82.2028
-margin_right = 131.427
-margin_bottom = 212.203
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="value_changed" from="Master/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
-[connection signal="value_changed" from="Music/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
-[connection signal="value_changed" from="Sound/SoundSlider" to="." method="_on_SoundSlider_value_changed"]
-[connection signal="value_changed" from="Difficulty/DifficultySlider" to="." method="_on_DifficultySlider_value_changed"]
+[connection signal="button_down" from="Play" to="." method="_on_Play_button_down"]
+[connection signal="button_down" from="Settings" to="." method="_on_Settings_button_down"]
+[connection signal="button_down" from="Credits" to="." method="_on_Credits_button_down"]
+[connection signal="button_down" from="Exit" to="." method="_on_Exit_button_down"]

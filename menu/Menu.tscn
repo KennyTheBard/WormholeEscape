@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://menu/Menu.gd" type="Script" id=1]
+[ext_resource path="res://props/Stars.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 0.0784314, 0.0784314, 0.0784314, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -14.0454
+margin_top = -28.0906
+margin_right = 1958.95
+margin_bottom = 1109.91
+texture = SubResource( 2 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LeftStars" parent="." instance=ExtResource( 4 )]
+position = Vector2( -55.9231, 563.747 )
+
+[node name="RightStars" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1958.95, 547.769 )
+
+[node name="Submenu" type="Node" parent="."]
