@@ -26,6 +26,8 @@ func save_settings():
 	var data = JSON.print({
 		"star_brightness": settings.star_brightness,
 		"master_volume": settings.master_volume,
+		"music_volume": settings.music_volume,
+		"sfx_volume": settings.sfx_volume,
 		"difficulty": settings.difficulty
 	})
 	file.store_line(data)
@@ -38,5 +40,7 @@ func load_settings():
 		var data = JSON.parse(file.get_line())
 		settings.star_brightness = data.result.get("star_brightness", 1)
 		settings.master_volume = data.result.get("master_volume", 1)
+		settings.music_volume = data.result.get("music_volume", 1)
+		settings.sfx_volume = data.result.get("sfx_volume", 1)
 		settings.difficulty = data.result.get("difficulty", settings.NORMAL)
 		file.close()

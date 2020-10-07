@@ -66,9 +66,11 @@ visible = true
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+bus = "SFX"
 
 [node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+bus = "SFX"
 [connection signal="timeout" from="Background/ColorTimer" to="." method="_on_ColorTimer_timeout"]
 [connection signal="timeout" from="AdvancingTimer" to="." method="_on_AdvancingTimer_timeout"]
 [connection signal="collected_coin" from="Player" to="." method="_on_Player_collected_coin"]
