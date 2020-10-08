@@ -8,7 +8,7 @@ export(float) var minimum_distance = 25
 export(int) var ring_index = 14
 
 onready var ring_scene : PackedScene = preload("res://scenes/Ring.tscn")
-onready var main_menu_scene : PackedScene = load("res://menu/MainMenu.tscn")
+onready var menu_scene : PackedScene = load("res://menu/Menu.tscn")
 
 onready var center : Position2D = $Center
 onready var ring_container : Node2D = $RingContainer
@@ -71,7 +71,7 @@ func _process(delta):
 	# pause menu
 	if Input.is_action_just_pressed("pause") and not game_over:
 		if paused:
-			get_tree().change_scene_to(main_menu_scene)
+			get_tree().change_scene_to(menu_scene)
 		else:
 			paused = true
 			toggle_rings_rotation(false)
