@@ -29,7 +29,7 @@ custom_fonts/font = ExtResource( 3 )
 text = "Play"
 flat = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="Settings" type="Button" parent="."]
@@ -41,7 +41,7 @@ custom_fonts/font = ExtResource( 3 )
 text = "Settings"
 flat = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="Credits" type="Button" parent="."]
@@ -50,11 +50,10 @@ margin_top = 629.0
 margin_right = 1217.0
 margin_bottom = 769.0
 custom_fonts/font = ExtResource( 3 )
-disabled = true
 text = "Credits"
 flat = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="Exit" type="Button" parent="."]
@@ -66,7 +65,7 @@ custom_fonts/font = ExtResource( 3 )
 text = "Exit"
 flat = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 [connection signal="button_down" from="Play" to="." method="_on_Play_button_down"]
 [connection signal="button_down" from="Settings" to="." method="_on_Settings_button_down"]

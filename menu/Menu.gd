@@ -4,10 +4,10 @@ onready var wormhole_scene : PackedScene = load("res://scenes/Wormhole.tscn")
 
 onready var main_menu_scene : PackedScene = preload("res://menu/MainMenu.tscn")
 onready var settings_menu_scene : PackedScene = preload("res://menu/SettingsMenu.tscn")
-
+onready var credits_scene : PackedScene = preload("res://menu/Credits.tscn")
 
 func _ready():
-	_on_SettingsMenu_press_back()
+	return_to_main_menu()
 
 
 func _on_MainMenu_press_play():
@@ -16,18 +16,19 @@ func _on_MainMenu_press_play():
 
 func _on_MainMenu_press_settings():
 	var instance = add_submenu_instance(settings_menu_scene)
-	instance.connect("press_back", self, "_on_SettingsMenu_press_back")
+	instance.connect("press_back", self, "return_to_main_menu")
 
 
 func _on_MainMenu_press_credits():
-	pass # Replace with function body.
+	var instance = add_submenu_instance(credits_scene)
+	instance.connect("press_back", self, "return_to_main_menu")
 
 
 func _on_MainMenu_press_exit():
 	get_tree().quit()
 
 
-func _on_SettingsMenu_press_back():
+func return_to_main_menu():
 	var instance = add_submenu_instance(main_menu_scene)
 	instance.connect("press_play", self, "_on_MainMenu_press_play")
 	instance.connect("press_settings", self, "_on_MainMenu_press_settings")

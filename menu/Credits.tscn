@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/BasicFont64.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/BasicFont42.tres" type="DynamicFont" id=2]
+[ext_resource path="res://menu/Credits.gd" type="Script" id=3]
+
+[node name="Credits" type="Node"]
+script = ExtResource( 3 )
+
+[node name="Music" type="RichTextLabel" parent="."]
+margin_left = 15.9363
+margin_top = 175.816
+margin_right = 1909.94
+margin_bottom = 418.816
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[center]MUSIC:
+[url=https://incompetech.filmmusic.io/song/5030-raving-energy-faster-]Raving Energy (faster) by Kevin MacLeod[/url]
+License: [url]http://creativecommons.org/licenses/by/4.0/[/url][/center]"
+text = "MUSIC:
+Raving Energy (faster) by Kevin MacLeod
+License: http://creativecommons.org/licenses/by/4.0/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icons" type="RichTextLabel" parent="."]
+margin_left = 15.9363
+margin_top = 480.408
+margin_right = 1912.94
+margin_bottom = 669.408
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[center]Icons made by [url=\"https://www.flaticon.com/authors/freepik\"]Freepik[/url] from [url=\"https://www.flaticon.com/\"]www.flaticon.com[/url][/center]"
+text = "Icons made by Freepik from www.flaticon.com"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles & SFX" type="RichTextLabel" parent="."]
+margin_left = 15.9363
+margin_top = 669.408
+margin_right = 1912.94
+margin_bottom = 858.408
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[center]Particles and SFX by Kenney[/center]"
+text = "Particles and SFX by Kenney"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="."]
+margin_left = 829.308
+margin_top = 888.382
+margin_right = 1033.31
+margin_bottom = 990.382
+custom_fonts/font = ExtResource( 1 )
+text = "back"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_down" from="Back" to="." method="_on_Back_button_down"]
