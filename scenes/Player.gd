@@ -40,10 +40,10 @@ func _draw():
 	
 	draw_arc(Vector2(), target_radius,
 		0 + target_rotation, PI - deg2rad(45) + target_rotation,
-		200, color, 1, true)
+		20, color, 1, true)
 	draw_arc(Vector2(), target_radius,
 		PI + target_rotation, 2 * PI - deg2rad(45) + target_rotation,
-		200, color, 1, true)
+		20, color, 1, true)
 
 
 func _process(delta):

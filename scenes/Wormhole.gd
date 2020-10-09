@@ -68,14 +68,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# pause menu
-	if Input.is_action_just_pressed("pause") and not game_over:
-		if paused:
-			get_tree().change_scene_to(menu_scene)
-		else:
-			paused = true
-			toggle_rings_rotation(false)
-			$Paused.visible = true
+	# resume
 	if Input.is_action_just_pressed("advance") and paused:
 		paused = false
 		$Paused.visible = false
@@ -234,3 +227,15 @@ func rand_color(start_interval : float = 0, end_interval : float = 1) -> Color:
 		rand_range(start_interval, end_interval),
 		rand_range(start_interval, end_interval),
 		rand_range(start_interval, end_interval))
+
+
+func _on_PauseButton_button_down():
+	if not paused:
+		paused = true
+		toggle_rings_rotation(false)
+		$Paused.visible = true
+
+
+func _on_Paused_back_to_main_menu():
+	if paused:
+		get_tree().change_scene_to(menu_scene)

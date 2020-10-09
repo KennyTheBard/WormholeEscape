@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/DeadEffect.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 20.7237
+radius = 11.4521
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0.528409 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
@@ -34,10 +34,12 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 self_modulate = Color( 0, 1, 1, 1 )
+position = Vector2( 2.25308, 0.250343 )
 scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 1 )
 
 [node name="Thrusters" type="Particles2D" parent="."]
+show_behind_parent = true
 position = Vector2( -7.025, 0 )
 emitting = false
 amount = 100

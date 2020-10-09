@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/BasicFont128.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/BasicFont64.tres" type="DynamicFont" id=2]
+[ext_resource path="res://menu/Paused.gd" type="Script" id=3]
+[ext_resource path="res://assets/back.png" type="Texture" id=4]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -11,7 +13,7 @@ colors = PoolColorArray( 0, 0, 0, 0.784314 )
 gradient = SubResource( 1 )
 
 [node name="Paused" type="Control"]
-visible = false
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -28,10 +30,10 @@ __meta__ = {
 }
 
 [node name="PauseLabel" type="Label" parent="."]
-margin_left = 1.0
-margin_top = 137.0
-margin_right = 1917.0
-margin_bottom = 446.0
+margin_left = -7.40942
+margin_top = 94.9526
+margin_right = 1908.59
+margin_bottom = 403.953
 custom_fonts/font = ExtResource( 1 )
 text = "Pause"
 align = 1
@@ -45,30 +47,35 @@ anchor_left = 0.518
 anchor_top = 0.436
 anchor_right = 0.518
 anchor_bottom = 0.436
-margin_left = 1.0
-margin_top = 477.0
-margin_right = 1919.0
-margin_bottom = 778.0
+margin_left = -3.20471
+margin_top = 413.929
+margin_right = 1914.8
+margin_bottom = 714.929
 custom_fonts/font = ExtResource( 2 )
-text = "Press \"Space\" to continue"
+text = "Press \"Space\" to resume"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MainMenuLabel" type="Label" parent="."]
-anchor_left = 0.518
-anchor_top = 0.436
-anchor_right = 0.518
-anchor_bottom = 0.436
-margin_top = 677.318
-margin_right = 1918.0
-margin_bottom = 978.318
+[node name="Button" type="Button" parent="."]
+margin_left = 563.435
+margin_top = 807.309
+margin_right = 1323.43
+margin_bottom = 909.309
 custom_fonts/font = ExtResource( 2 )
-text = "Press \"ESC\" to return to main menu"
-align = 1
-valign = 1
+text = "Back to main menu"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextureRect" type="TextureRect" parent="Button"]
+margin_left = -100.238
+margin_top = 28.7512
+margin_right = 26.7616
+margin_bottom = 135.751
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+[connection signal="button_down" from="Button" to="." method="_on_Button_button_down"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/Wormhole.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://props/Center.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/explosion.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/collect_coin.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/pause.png" type="Texture" id=10]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -62,7 +63,6 @@ text = "Highscore:"
 [node name="GameOver" parent="." instance=ExtResource( 5 )]
 
 [node name="Paused" parent="." instance=ExtResource( 6 )]
-visible = true
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
@@ -71,8 +71,21 @@ bus = "SFX"
 [node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 bus = "SFX"
+
+[node name="PauseButton" type="TextureButton" parent="."]
+margin_left = 1830.72
+margin_top = 977.92
+margin_right = 1937.72
+margin_bottom = 1105.92
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="Background/ColorTimer" to="." method="_on_ColorTimer_timeout"]
 [connection signal="timeout" from="AdvancingTimer" to="." method="_on_AdvancingTimer_timeout"]
 [connection signal="collected_coin" from="Player" to="." method="_on_Player_collected_coin"]
 [connection signal="died" from="Player" to="." method="_on_Player_died"]
 [connection signal="game_over" from="Player" to="." method="_on_Player_game_over"]
+[connection signal="back_to_main_menu" from="Paused" to="." method="_on_Paused_back_to_main_menu"]
+[connection signal="button_down" from="PauseButton" to="." method="_on_PauseButton_button_down"]
