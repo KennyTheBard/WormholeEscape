@@ -66,10 +66,14 @@ func _on_DifficultySlider_value_changed(value):
 	settings.difficulty = value
 	if value == settings.SLOW:
 		difficulty_label.text = "SLOW"
+	elif value == settings.SLOW:
+		difficulty_label.text = "SLOW"
 	elif value == settings.NORMAL:
 		difficulty_label.text = "NORMAL"
-	else :
+	elif value == settings.FAST:
 		difficulty_label.text = "FAST"
+	else:
+		difficulty_label.text = "FASTEST"
 	timer.start(1)
 
 

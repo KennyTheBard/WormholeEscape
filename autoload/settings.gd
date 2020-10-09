@@ -1,9 +1,11 @@
 extends Node
 
 enum {
-	SLOW = 1,
-	NORMAL = 2,
-	FAST = 3
+	SLOWEST = 1,
+	SLOW = 2,
+	NORMAL = 3,
+	FAST = 4,
+	FASTEST = 5
 }
 
 var star_brightness : float = 1
@@ -14,12 +16,16 @@ var difficulty : int = NORMAL
 
 
 func get_difficulty_modifier() -> float:
-	if difficulty == settings.SLOW:
+	if difficulty == settings.SLOWEST:
+		return 0.25
+	elif difficulty == settings.SLOW:
 		return 0.5
 	elif difficulty == settings.NORMAL:
 		return 1.0
-	else :
+	elif difficulty == settings.FAST:
 		return 1.5
+	else :
+		return 2.0
 
 
 func set_master_volume(value : float):
