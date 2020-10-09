@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Wormhole.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://assets/explosion.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/collect_coin.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/pause.png" type="Texture" id=10]
+[ext_resource path="res://assets/BasicFont64.tres" type="DynamicFont" id=11]
+[ext_resource path="res://ui/AdvanceHint.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -61,6 +63,7 @@ margin_bottom = 195.198
 text = "Highscore:"
 
 [node name="GameOver" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="Paused" parent="." instance=ExtResource( 6 )]
 
@@ -82,6 +85,40 @@ texture_normal = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AdvanceHint" type="Label" parent="."]
+anchor_left = 0.518
+anchor_top = 0.436
+anchor_right = 0.518
+anchor_bottom = 0.436
+margin_left = 1.0
+margin_top = 757.114
+margin_right = 1919.0
+margin_bottom = 1058.11
+custom_fonts/font = ExtResource( 11 )
+text = "Press                                   to play again"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hint" type="Control" parent="AdvanceHint" instance=ExtResource( 12 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 505.203
+margin_top = 93.7723
+margin_right = 505.203
+margin_bottom = 93.7723
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+autostart = true
 [connection signal="timeout" from="Background/ColorTimer" to="." method="_on_ColorTimer_timeout"]
 [connection signal="timeout" from="AdvancingTimer" to="." method="_on_AdvancingTimer_timeout"]
 [connection signal="collected_coin" from="Player" to="." method="_on_Player_collected_coin"]
@@ -91,3 +128,4 @@ __meta__ = {
 [connection signal="button_down" from="PauseButton" to="." method="_on_PauseButton_button_down"]
 [connection signal="mouse_entered" from="PauseButton" to="." method="_on_PauseButton_mouse_entered"]
 [connection signal="mouse_exited" from="PauseButton" to="." method="_on_PauseButton_mouse_exited"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]

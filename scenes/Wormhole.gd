@@ -20,6 +20,7 @@ onready var color_tween = $Background/ColorTween
 
 var rings : Array = []
 var advancing : bool = false
+var ready_to_start : bool = false
 var level : int = 1
 var player_angle : float = 180
 var game_over : bool = false
@@ -70,8 +71,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# ignore action when the mouse is over pause button
-	# otherwise the next block will close pause menu
-	if Input.is_action_just_pressed("advance") and mouse_over_pause:
+	# (otherwise the next block will close pause menu)
+	# and ignore action before the game is ready
+	# (otherwise a leftover input action could trigger the first advance)
+	if Input.is_action_just_pressed("advance") and (mouse_over_pause or not ready_to_start):
 		return
 	
 	# resume from pause
@@ -102,6 +105,9 @@ func _process(delta):
 		get_tree().reload_current_scene()
 
 func advance():
+	# hide the advance hint after the first advance
+	$AdvanceHint.visible = false
+	
 	# add points to score according to the level
 	set_score(score + 1 + level / 10 + (settings.difficulty - 1))
 	
@@ -254,3 +260,7 @@ func _on_PauseButton_mouse_entered():
 
 func _on_PauseButton_mouse_exited():
 	mouse_over_pause = false
+
+
+func _on_StartTimer_timeout():
+	ready_to_start = true
