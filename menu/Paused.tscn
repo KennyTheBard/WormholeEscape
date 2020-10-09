@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/BasicFont128.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/BasicFont64.tres" type="DynamicFont" id=2]
 [ext_resource path="res://menu/Paused.gd" type="Script" id=3]
 [ext_resource path="res://assets/back.png" type="Texture" id=4]
+[ext_resource path="res://ui/AdvanceHint.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -13,6 +14,7 @@ colors = PoolColorArray( 0, 0, 0, 0.784314 )
 gradient = SubResource( 1 )
 
 [node name="Paused" type="Control"]
+visible = false
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -52,12 +54,18 @@ margin_top = 413.929
 margin_right = 1914.8
 margin_bottom = 714.929
 custom_fonts/font = ExtResource( 2 )
-text = "Press \"Space\" to resume"
+text = "Press                                   to resume"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Hint" parent="ContinueLabel" instance=ExtResource( 5 )]
+margin_left = 563.0
+margin_top = 101.455
+margin_right = -751.0
+margin_bottom = -54.5451
 
 [node name="Button" type="Button" parent="."]
 margin_left = 563.435

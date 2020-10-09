@@ -25,6 +25,7 @@ var player_angle : float = 180
 var game_over : bool = false
 var can_restart : bool = false
 var paused : bool = false
+var mouse_over_pause : bool = false
 var score : int = 0 setget set_score
 var highscore : int = 0
 
@@ -68,11 +69,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# resume
+	# ignore action when the mouse is over pause button
+	# otherwise the next block will close pause menu
+	if Input.is_action_just_pressed("advance") and mouse_over_pause:
+		return
+	
+	# resume from pause
 	if Input.is_action_just_pressed("advance") and paused:
 		paused = false
-		$Paused.visible = false
 		toggle_rings_rotation(true)
+		$Paused.visible = false
 		return
 	
 	# while advancing ignore everything
@@ -87,7 +93,7 @@ func _process(delta):
 		player.global_position = center.global_position + relative_position
 	
 	# advance on key pressed
-	if Input.is_action_just_pressed("advance") and not (game_over or paused):
+	if Input.is_action_just_pressed("advance") and not (game_over):
 		advancing = true
 		advance()
 	
@@ -236,6 +242,15 @@ func _on_PauseButton_button_down():
 		$Paused.visible = true
 
 
+
 func _on_Paused_back_to_main_menu():
 	if paused:
 		get_tree().change_scene_to(menu_scene)
+
+
+func _on_PauseButton_mouse_entered():
+	mouse_over_pause = true
+
+
+func _on_PauseButton_mouse_exited():
+	mouse_over_pause = false

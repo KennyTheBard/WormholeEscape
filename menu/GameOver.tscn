@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/BasicFont128.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/BasicFont64.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/AdvanceHint.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -67,14 +68,20 @@ anchor_left = 0.518
 anchor_top = 0.436
 anchor_right = 0.518
 anchor_bottom = 0.436
-margin_left = -4.15698
-margin_top = 677.318
-margin_right = 1913.84
-margin_bottom = 978.318
+margin_left = 1.0
+margin_top = 669.0
+margin_right = 1919.0
+margin_bottom = 970.0
 custom_fonts/font = ExtResource( 2 )
-text = "Press \"Space\" to play again"
+text = "Press                                   to play again"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Hint" parent="ReplayLabel" instance=ExtResource( 3 )]
+margin_left = 505.203
+margin_top = 93.7723
+margin_right = 505.203
+margin_bottom = 93.7723

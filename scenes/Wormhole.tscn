@@ -89,3 +89,5 @@ __meta__ = {
 [connection signal="game_over" from="Player" to="." method="_on_Player_game_over"]
 [connection signal="back_to_main_menu" from="Paused" to="." method="_on_Paused_back_to_main_menu"]
 [connection signal="button_down" from="PauseButton" to="." method="_on_PauseButton_button_down"]
+[connection signal="mouse_entered" from="PauseButton" to="." method="_on_PauseButton_mouse_entered"]
+[connection signal="mouse_exited" from="PauseButton" to="." method="_on_PauseButton_mouse_exited"]

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/Space.gd" type="Script" id=1]
+[ext_resource path="res://assets/spaced.png" type="Texture" id=2]
+[ext_resource path="res://assets/unspaced.png" type="Texture" id=3]
+
+[node name="Space" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 2, 0.75 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Unspace" type="TextureRect" parent="."]
+margin_right = 123.0
+margin_bottom = 126.0
+texture = ExtResource( 3 )
+
+[node name="Space" type="TextureRect" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
