@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/BasicFont42.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/NewHighscoreLabel.gd" type="Script" id=2]
+
+[node name="NewHighscoreLabel" type="Label"]
+visible = false
+margin_left = 2.0
+margin_top = 11.0
+margin_right = 1913.0
+margin_bottom = 101.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 0.494118, 0, 1 )
+text = "New highscore!!"
+align = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+[connection signal="timeout" from="ColorTimer" to="." method="_on_ColorTimer_timeout"]

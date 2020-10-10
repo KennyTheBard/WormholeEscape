@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/Wormhole.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -12,8 +12,9 @@
 [ext_resource path="res://assets/pause.png" type="Texture" id=10]
 [ext_resource path="res://assets/BasicFont64.tres" type="DynamicFont" id=11]
 [ext_resource path="res://ui/AdvanceHint.tscn" type="PackedScene" id=12]
-[ext_resource path="res://assets/BasicFont42.tres" type="DynamicFont" id=13]
-[ext_resource path="res://scenes/NewHighscoreLabel.gd" type="Script" id=14]
+[ext_resource path="res://scenes/FullscreenModeButton.gd" type="Script" id=13]
+[ext_resource path="res://ui/NewHighscoreLabel.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/fullscreen_on.png" type="Texture" id=15]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -88,6 +89,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FullscreenModeButton" type="TextureButton" parent="."]
+margin_left = 1732.29
+margin_top = 977.92
+margin_right = 1839.29
+margin_bottom = 1105.92
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 15 )
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="AdvanceHint" type="Label" parent="."]
 anchor_left = 0.518
 anchor_top = 0.436
@@ -102,6 +115,7 @@ text = "Press                                   to play again"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -116,24 +130,7 @@ wait_time = 0.25
 one_shot = true
 autostart = true
 
-[node name="NewHighscoreLabel" type="Label" parent="."]
-visible = false
-margin_left = 2.0
-margin_top = 11.0
-margin_right = 1913.0
-margin_bottom = 101.0
-custom_fonts/font = ExtResource( 13 )
-custom_colors/font_color = Color( 1, 0.494118, 0, 1 )
-text = "New highscore!!"
-align = 1
-script = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorTimer" type="Timer" parent="NewHighscoreLabel"]
-wait_time = 0.5
-autostart = true
+[node name="NewHighscoreLabel" parent="." instance=ExtResource( 14 )]
 [connection signal="timeout" from="Background/ColorTimer" to="." method="_on_ColorTimer_timeout"]
 [connection signal="timeout" from="AdvancingTimer" to="." method="_on_AdvancingTimer_timeout"]
 [connection signal="collected_coin" from="Player" to="." method="_on_Player_collected_coin"]
@@ -143,5 +140,8 @@ autostart = true
 [connection signal="button_down" from="PauseButton" to="." method="_on_PauseButton_button_down"]
 [connection signal="mouse_entered" from="PauseButton" to="." method="_on_PauseButton_mouse_entered"]
 [connection signal="mouse_exited" from="PauseButton" to="." method="_on_PauseButton_mouse_exited"]
+[connection signal="button_down" from="FullscreenModeButton" to="FullscreenModeButton" method="_on_FullscreenModeButton_button_down"]
+[connection signal="button_down" from="FullscreenModeButton" to="." method="_on_FullscreenModeButton_button_down"]
+[connection signal="mouse_entered" from="FullscreenModeButton" to="." method="_on_PauseButton_mouse_entered"]
+[connection signal="mouse_exited" from="FullscreenModeButton" to="." method="_on_PauseButton_mouse_exited"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
-[connection signal="timeout" from="NewHighscoreLabel/ColorTimer" to="NewHighscoreLabel" method="_on_ColorTimer_timeout"]

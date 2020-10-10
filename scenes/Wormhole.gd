@@ -26,7 +26,7 @@ var player_angle : float = 180
 var game_over : bool = false
 var can_restart : bool = false
 var paused : bool = false
-var mouse_over_pause : bool = false
+var mouse_over_button : bool = false
 var score : int = 0
 var highscore : int = 0
 
@@ -74,7 +74,7 @@ func _process(delta):
 	# (otherwise the next block will close pause menu)
 	# and ignore action before the game is ready
 	# (otherwise a leftover input action could trigger the first advance)
-	if Input.is_action_just_pressed("advance") and (mouse_over_pause or not ready_to_start):
+	if Input.is_action_just_pressed("advance") and (mouse_over_button or not ready_to_start):
 		return
 	
 	# resume from pause
@@ -258,21 +258,23 @@ func _on_PauseButton_button_down():
 		$Paused.visible = true
 
 
-
 func _on_Paused_back_to_main_menu():
 	if paused:
 		get_tree().change_scene_to(menu_scene)
 
 
 func _on_PauseButton_mouse_entered():
-	mouse_over_pause = true
+	mouse_over_button = true
 
 
 func _on_PauseButton_mouse_exited():
-	mouse_over_pause = false
+	mouse_over_button = false
 
 
 func _on_StartTimer_timeout():
 	ready_to_start = true
 
 
+func _on_FullscreenModeButton_button_down():
+	print("down")
+	OS.window_fullscreen = not OS.window_fullscreen
