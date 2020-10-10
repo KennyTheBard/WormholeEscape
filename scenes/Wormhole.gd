@@ -5,8 +5,8 @@ export(float) var advancing_period = 1
 export(float) var radius_increase_factor = 1.35
 export(float) var initial_radius = 8
 export(float) var minimum_distance = 25
-export(float) var attackers_speed = 1
-export(float) var attackers_acc = 0.15 
+export(float) var attackers_speed = 0.1
+export(float) var attackers_acc = 0.1
 export(int) var player_ring_index = 14
 
 onready var ring_scene : PackedScene = preload("res://scenes/Ring.tscn")
@@ -31,7 +31,7 @@ var paused : bool = false
 var mouse_over_button : bool = false
 var score : int = 0
 var highscore : int = 0
-var attackers_distance : float = -5
+var attackers_distance : float = -15
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -72,9 +72,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# update attackers
-	attackers_distance += attackers_speed * delta
-	attackers_speed += attackers_acc * delta
 	
 	# update attacked rings
 	for ring_index in range(player_ring_index, num_rings):
@@ -109,6 +106,11 @@ func _process(delta):
 		var relative_position : Vector2 = curr_ring.calculate_position_on_ring(player_angle)
 		player.global_position = center.global_position + relative_position
 	
+	# update attackers
+	attackers_distance += attackers_speed * delta
+	attackers_speed += attackers_acc * delta
+	$AttackersDistance.value = attackers_distance + 20
+	
 	# advance on key pressed
 	if Input.is_action_just_pressed("advance") and not (game_over):
 		advancing = true
@@ -125,8 +127,10 @@ func advance():
 	# add points to score according to the level
 	add_score(calculate_score_ring())
 	
-	# increment level and decrement attackers distance
+	# increment level
 	level += 1
+	
+	# update attackers
 	attackers_distance = max(-20, attackers_distance - 1)
 	
 	# remove a ring if the desired number is reached
