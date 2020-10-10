@@ -23,7 +23,6 @@ config/windows_native_icon="res://assets/logo_M4i_icon.ico"
 [autoload]
 
 init="*res://autoload/init.gd"
-debug="*res://autoload/debug.gd"
 settings="*res://autoload/settings.gd"
 save_system="*res://autoload/save_system.gd"
 MusicPlayer="*res://autoload/MusicPlayer.tscn"
