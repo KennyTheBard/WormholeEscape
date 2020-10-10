@@ -108,7 +108,7 @@ func _process(delta):
 	
 	# update attackers
 	attackers_distance += attackers_speed * delta
-	attackers_speed += attackers_acc * delta
+	attackers_speed += attackers_acc * delta * settings.get_difficulty_modifier()
 	$AttackersDistance.value = attackers_distance + 20
 	
 	# advance on key pressed
