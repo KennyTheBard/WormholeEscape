@@ -21,6 +21,8 @@ onready var sound_label : Label = $Sound/Value
 onready var difficulty_slider : HSlider = $Difficulty/DifficultySlider
 onready var difficulty_label : Label = $Difficulty/Value
 
+onready var high_contrast_mode_checkbox : CheckBox = $HighContrast/CheckBox
+
 # because the fact that preloading is done at compilation,
 # you cannot preload cyclic dependencies
 onready var wormhole_scene : PackedScene = load("res://scenes/Wormhole.tscn")
@@ -32,6 +34,7 @@ func _ready():
 	music_slider.value = settings.music_volume
 	sound_slider.value = settings.sfx_volume
 	difficulty_slider.value = settings.difficulty
+	high_contrast_mode_checkbox.pressed = settings.high_contrast_mode
 
 
 func _on_Timer_timeout():
@@ -80,3 +83,8 @@ func _on_DifficultySlider_value_changed(value):
 func _on_Back_button_down():
 	save_system.save_settings()
 	emit_signal("press_back")
+
+
+func _on_CheckBox_toggled(button_pressed):
+	settings.high_contrast_mode = button_pressed
+	timer.start(1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/BasicFont42.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/BasicFont24.tres" type="DynamicFont" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://assets/master.png" type="Texture" id=7]
 [ext_resource path="res://menu/SettingsMenu.gd" type="Script" id=8]
 [ext_resource path="res://assets/BasicFont64.tres" type="DynamicFont" id=9]
+[ext_resource path="res://assets/checkbox_empty.png" type="Texture" id=10]
+[ext_resource path="res://assets/checkbox_checker.png" type="Texture" id=11]
 
 [node name="SettingsMenu" type="Node"]
 script = ExtResource( 8 )
@@ -19,9 +21,9 @@ one_shot = true
 
 [node name="Brightness" type="Control" parent="."]
 margin_left = 492.06
-margin_top = 97.0457
+margin_top = 33.4785
 margin_right = 1363.06
-margin_bottom = 261.046
+margin_bottom = 197.479
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -36,6 +38,7 @@ text = "Particles brightness"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -48,6 +51,7 @@ rect_scale = Vector2( 1, 3 )
 max_value = 1.0
 step = 0.01
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -77,9 +81,9 @@ __meta__ = {
 
 [node name="Master" type="Control" parent="."]
 margin_left = 453.06
-margin_top = 234.884
+margin_top = 173.367
 margin_right = 1375.06
-margin_bottom = 397.884
+margin_bottom = 336.367
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -94,6 +98,7 @@ text = "Master volume"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -138,9 +143,9 @@ __meta__ = {
 
 [node name="Music" type="Control" parent="."]
 margin_left = 460.85
-margin_top = 379.997
+margin_top = 318.48
 margin_right = 1382.85
-margin_bottom = 547.997
+margin_bottom = 486.48
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -155,6 +160,7 @@ text = "Music volume"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -199,9 +205,9 @@ __meta__ = {
 
 [node name="Sound" type="Control" parent="."]
 margin_left = 456.334
-margin_top = 523.69
+margin_top = 462.173
 margin_right = 1378.33
-margin_bottom = 728.69
+margin_bottom = 667.173
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -216,6 +222,7 @@ text = "SFX volume"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -260,9 +267,9 @@ __meta__ = {
 
 [node name="Difficulty" type="Control" parent="."]
 margin_left = 472.06
-margin_top = 659.932
+margin_top = 598.415
 margin_right = 1421.06
-margin_bottom = 833.93
+margin_bottom = 772.413
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -277,6 +284,7 @@ text = "Game speed"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -319,11 +327,46 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="HighContrast" type="Control" parent="."]
+margin_left = 625.978
+margin_top = 774.131
+margin_right = 1287.98
+margin_bottom = 868.131
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="HighContrast"]
+margin_left = 9.04318
+margin_top = 9.85187
+margin_right = 173.043
+margin_bottom = 145.852
+rect_scale = Vector2( 0.5, 0.5 )
+custom_icons/checked = ExtResource( 11 )
+custom_icons/unchecked = ExtResource( 10 )
+custom_fonts/font = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HighContrast"]
+margin_left = 91.0652
+margin_top = 8.77228
+margin_right = 626.065
+margin_bottom = 72.7723
+custom_fonts/font = ExtResource( 1 )
+text = "High contrast mode"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
 [node name="Back" type="Button" parent="."]
 margin_left = 829.308
-margin_top = 888.382
+margin_top = 896.584
 margin_right = 1033.31
-margin_bottom = 990.382
+margin_bottom = 998.584
 custom_fonts/font = ExtResource( 9 )
 text = "back"
 flat = true
@@ -336,4 +379,5 @@ __meta__ = {
 [connection signal="value_changed" from="Music/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
 [connection signal="value_changed" from="Sound/SoundSlider" to="." method="_on_SoundSlider_value_changed"]
 [connection signal="value_changed" from="Difficulty/DifficultySlider" to="." method="_on_DifficultySlider_value_changed"]
+[connection signal="toggled" from="HighContrast/CheckBox" to="." method="_on_CheckBox_toggled"]
 [connection signal="button_down" from="Back" to="." method="_on_Back_button_down"]

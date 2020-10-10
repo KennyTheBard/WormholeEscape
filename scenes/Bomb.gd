@@ -11,6 +11,9 @@ func _ready():
 	rotation_tween.interpolate_property(sprite, "rotation", 0, -2 * PI, 5)
 	rotation_tween.start()
 	
+	if settings.high_contrast_mode:
+		$Star/Core.self_modulate = Color.white
+	
 	_on_ScaleUpTween_tween_completed(null, null)
 
 

@@ -13,6 +13,7 @@ var master_volume : float = 1 setget set_master_volume
 var music_volume : float = 1 setget set_music_volume
 var sfx_volume : float = 1 setget set_sfx_volume
 var difficulty : int = NORMAL
+var high_contrast_mode : bool = false
 
 
 func get_difficulty_modifier() -> float:

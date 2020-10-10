@@ -28,7 +28,8 @@ func save_settings():
 		"master_volume": settings.master_volume,
 		"music_volume": settings.music_volume,
 		"sfx_volume": settings.sfx_volume,
-		"difficulty": settings.difficulty
+		"difficulty": settings.difficulty,
+		"high_contrast_mode": settings.high_contrast_mode
 	})
 	file.store_line(data)
 	file.close()
@@ -43,4 +44,5 @@ func load_settings():
 		settings.music_volume = data.result.get("music_volume", 1)
 		settings.sfx_volume = data.result.get("sfx_volume", 1)
 		settings.difficulty = data.result.get("difficulty", settings.NORMAL)
+		settings.high_contrast_mode = data.result.get("high_contrast_mode", false)
 		file.close()
