@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/Wormhole.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://assets/pause.png" type="Texture" id=10]
 [ext_resource path="res://assets/BasicFont64.tres" type="DynamicFont" id=11]
 [ext_resource path="res://ui/AdvanceHint.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/BasicFont42.tres" type="DynamicFont" id=13]
+[ext_resource path="res://scenes/NewHighscoreLabel.gd" type="Script" id=14]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -103,21 +105,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hint" type="Control" parent="AdvanceHint" instance=ExtResource( 12 )]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Hint" parent="AdvanceHint" instance=ExtResource( 12 )]
 margin_left = 505.203
 margin_top = 93.7723
 margin_right = 505.203
 margin_bottom = 93.7723
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
+autostart = true
+
+[node name="NewHighscoreLabel" type="Label" parent="."]
+visible = false
+margin_left = 2.0
+margin_top = 11.0
+margin_right = 1913.0
+margin_bottom = 101.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 1, 0.494118, 0, 1 )
+text = "New highscore!!"
+align = 1
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorTimer" type="Timer" parent="NewHighscoreLabel"]
+wait_time = 0.5
 autostart = true
 [connection signal="timeout" from="Background/ColorTimer" to="." method="_on_ColorTimer_timeout"]
 [connection signal="timeout" from="AdvancingTimer" to="." method="_on_AdvancingTimer_timeout"]
@@ -129,3 +144,4 @@ autostart = true
 [connection signal="mouse_entered" from="PauseButton" to="." method="_on_PauseButton_mouse_entered"]
 [connection signal="mouse_exited" from="PauseButton" to="." method="_on_PauseButton_mouse_exited"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="timeout" from="NewHighscoreLabel/ColorTimer" to="NewHighscoreLabel" method="_on_ColorTimer_timeout"]

@@ -27,7 +27,7 @@ var game_over : bool = false
 var can_restart : bool = false
 var paused : bool = false
 var mouse_over_pause : bool = false
-var score : int = 0 setget set_score
+var score : int = 0
 var highscore : int = 0
 
 
@@ -109,7 +109,7 @@ func advance():
 	$AdvanceHint.visible = false
 	
 	# add points to score according to the level
-	set_score(score + 1 + level / 10 + (settings.difficulty - 1))
+	add_score(calculate_score_ring())
 	
 	# increment level
 	level += 1
@@ -174,7 +174,7 @@ func generate_ring(empty : bool = false, fixed : bool = false) -> Node2D:
 		# randomly set rotation speed and direction
 		var rotation_speed = rand_range(30, 60 + level)
 		var direction = 1 if randi() % 2 == 0 else -1
-		var difficulty_modifier =  settings.get_difficulty_modifier()
+		var difficulty_modifier = settings.get_difficulty_modifier()
 		instance.ring_rotation_ps = direction * rotation_speed * difficulty_modifier
 	
 	# return configurated instance
@@ -188,9 +188,19 @@ func enough_minimum_distance(pos : float, elements : Array, minimum_distance : f
 	return true
 
 
-func set_score(new_score : int):
-	score = new_score
+func calculate_score_ring() -> int:
+	return int(max(1, (1 + level / 10) * settings.get_difficulty_modifier()))
+
+
+func calculate_score_coin() -> int:
+	return int(max(1, (1 + level / 20) * settings.get_difficulty_modifier()))
+
+
+func add_score(new_score : int):
+	score += new_score
 	score_label.text = str(score)
+	if score > highscore and highscore > 0:
+		$NewHighscoreLabel.show()
 
 
 func _on_AdvancingTimer_timeout():
@@ -224,7 +234,7 @@ func _on_Player_game_over():
 
 
 func _on_Player_collected_coin():
-	set_score(score + 1 + level / 20)
+	add_score(calculate_score_coin())
 	$CoinSound.play()
 
 
@@ -264,3 +274,5 @@ func _on_PauseButton_mouse_exited():
 
 func _on_StartTimer_timeout():
 	ready_to_start = true
+
+
