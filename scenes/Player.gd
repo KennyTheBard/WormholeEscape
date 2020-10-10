@@ -71,16 +71,20 @@ func _on_Player_area_entered(area):
 	
 	# wall or bomb collision
 	if area.get_collision_layer_bit(1) or area.get_collision_layer_bit(2):
-		emit_signal("died")
-		died = true
-		sprite.visible = false
-		dead_effect.play_effect()
-		toggle_thrusters(false)
+		die()
 	
 	# coin collision
 	if area.get_collision_layer_bit(3):
 		emit_signal("collected_coin")
 		area.delete()
+
+
+func die():
+	emit_signal("died")
+	died = true
+	sprite.visible = false
+	dead_effect.play_effect()
+	toggle_thrusters(false)
 
 
 func _on_DeadEffect_dead_effect_ended():

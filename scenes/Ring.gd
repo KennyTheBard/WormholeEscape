@@ -17,11 +17,12 @@ var radius : float = 8 setget set_radius
 var ring_rotation : float = 0
 var ring_rotation_ps : float = 0
 var rotating : bool = true
+var attacker_factor : float = 0
+var ring_color : Color = Color.white
 
 var bombs : Array = []
 var coins : Array = []
 var walls : Array = []
-
 
 func _ready():
 	# migrate bombs from scrip memory to the scene tree
@@ -53,7 +54,7 @@ func _process(delta):
 
 
 func _draw():
-	draw_arc(Vector2(), radius, 0, 360, point_count, Color.white, 1, true)
+	draw_arc(Vector2(), radius, 0, 360, point_count, ring_color, 1, true)
 
 
 func create_bombs(bomb_positions : Array):
@@ -93,6 +94,11 @@ func increase_radius(radius : float, transition_period : float = 1.0) -> void:
 func set_radius(new_radius : float):
 	radius = new_radius
 	update_props()
+
+
+func set_attacker_factor(new_attacker_factor: float):
+	attacker_factor = new_attacker_factor
+	ring_color = lerp(Color.white, Color.red, attacker_factor)
 
 
 func update_props():

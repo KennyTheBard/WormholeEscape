@@ -5,7 +5,9 @@ export(float) var advancing_period = 1
 export(float) var radius_increase_factor = 1.35
 export(float) var initial_radius = 8
 export(float) var minimum_distance = 25
-export(int) var ring_index = 14
+export(float) var attackers_speed = 1
+export(float) var attackers_acc = 0.15 
+export(int) var player_ring_index = 14
 
 onready var ring_scene : PackedScene = preload("res://scenes/Ring.tscn")
 onready var menu_scene : PackedScene = load("res://menu/Menu.tscn")
@@ -29,7 +31,7 @@ var paused : bool = false
 var mouse_over_button : bool = false
 var score : int = 0
 var highscore : int = 0
-
+var attackers_distance : float = -5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -59,7 +61,7 @@ func _ready():
 		# first ring after the ring the player starts on should be empty,
 		# but not fixed, otherwise the player might be spawned with a bomb
 		# on the next position and with no possibility to dodge it
-		var instance = generate_ring(ring_index <= i + 1, ring_index <= i)
+		var instance = generate_ring(player_ring_index <= i + 1, player_ring_index <= i)
 		instance.radius = radius
 		radius *= radius_increase_factor
 		
@@ -70,6 +72,18 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# update attackers
+	attackers_distance += attackers_speed * delta
+	attackers_speed += attackers_acc * delta
+	
+	# update attacked rings
+	for ring_index in range(player_ring_index, num_rings):
+		var current_index = ring_index - player_ring_index
+		var attacker_factor = current_index + attackers_distance
+		rings[ring_index].set_attacker_factor(min(1, max(0, attacker_factor)))
+		if current_index == 0 and attacker_factor >= 1 and not game_over:
+			player.die()
+			
 	# ignore action when the mouse is over pause button
 	# (otherwise the next block will close pause menu)
 	# and ignore action before the game is ready
@@ -89,7 +103,7 @@ func _process(delta):
 		return
 	
 	# calculate angle position of player and update angle position
-	var curr_ring = rings[ring_index]
+	var curr_ring = rings[player_ring_index]
 	if curr_ring.rotating:
 		player_angle += delta * curr_ring.ring_rotation_ps
 		var relative_position : Vector2 = curr_ring.calculate_position_on_ring(player_angle)
@@ -111,8 +125,9 @@ func advance():
 	# add points to score according to the level
 	add_score(calculate_score_ring())
 	
-	# increment level
+	# increment level and decrement attackers distance
 	level += 1
+	attackers_distance = max(-20, attackers_distance - 1)
 	
 	# remove a ring if the desired number is reached
 	if rings.size() >= num_rings:
@@ -230,6 +245,7 @@ func _on_Player_game_over():
 	$GameOver/ScoreLabel.text = game_over_label_text
 	$GameOver/ScoreLabel/Value.text = str(score)
 	$GameOver.visible = true
+	$AdvanceHint.visible = false
 	can_restart = true
 
 
