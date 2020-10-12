@@ -14,9 +14,9 @@ onready var menu_scene : PackedScene = load("res://menu/Menu.tscn")
 
 onready var center : Position2D = $Center
 onready var ring_container : Node2D = $RingContainer
-onready var advancing_timer : Timer = $AdvancingTimer
+onready var advancing_timer : Timer = $Misc/AdvancingTimer
 onready var player = $Player
-onready var score_label = $Score/Value
+onready var score_label = $GUI/Score/Value
 onready var background = $Background
 onready var color_tween = $Background/ColorTween
 
@@ -31,13 +31,13 @@ var paused : bool = false
 var mouse_over_button : bool = false
 var score : int = 0
 var highscore : int = 0
-var attackers_distance : float = -15
+var attackers_distance : float = -3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# hide gameover screen
-	$GameOver.visible = false
-	$Paused.visible = false
+	$GUI/GameOver.visible = false
+	$GUI/Paused.visible = false
 	can_restart = false
 	
 	# initial background color
@@ -46,8 +46,8 @@ func _ready():
 	# load highscore
 	highscore = save_system.load_score()
 	if highscore > 0:
-		$Highscore.visible = true
-		$Highscore/Value.text = str(highscore)
+		$GUI/Highscore.visible = true
+		$GUI/Highscore/Value.text = str(highscore)
 	
 	# center elements in the middle of the screen
 	var rect = get_viewport().get_visible_rect()
@@ -72,13 +72,19 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
+	if game_over:
+		# restart
+		if Input.is_action_just_pressed("advance") and can_restart:
+			get_tree().reload_current_scene()
+		return
+		
 	# update attacked rings
+	update_attackers_location()
 	for ring_index in range(player_ring_index, num_rings):
 		var current_index = ring_index - player_ring_index
 		var attacker_factor = current_index + attackers_distance
 		rings[ring_index].set_attacker_factor(min(1, max(0, attacker_factor)))
-		if current_index == 0 and attacker_factor >= 1 and not game_over:
+		if current_index == 0 and attacker_factor >= 1:
 			player.die()
 			
 	# ignore action when the mouse is over pause button
@@ -92,7 +98,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("advance") and paused:
 		paused = false
 		toggle_rings_rotation(true)
-		$Paused.visible = false
+		$GUI/Paused.visible = false
 		return
 	
 	# while advancing ignore everything
@@ -109,20 +115,30 @@ func _process(delta):
 	# update attackers
 	attackers_distance += attackers_speed * delta
 	attackers_speed += attackers_acc * delta * settings.get_difficulty_modifier()
-	$AttackersDistance.value = attackers_distance + 20
+	$GUI/AttackersDistance.value = attackers_distance + 20
 	
 	# advance on key pressed
-	if Input.is_action_just_pressed("advance") and not (game_over):
+	if Input.is_action_just_pressed("advance"):
 		advancing = true
 		advance()
-	
-	# restart
-	if Input.is_action_just_pressed("advance") and can_restart:
-		get_tree().reload_current_scene()
+
+
+func update_attackers_location():
+	for attacker in $AttackersContainer.get_children():
+		var next_ring = rings[player_ring_index - ceil(max(-3, attackers_distance)) + 1]
+		var prev_ring = rings[player_ring_index - floor(max(-3, attackers_distance)) + 1]
+		var alpha = attackers_distance - floor(attackers_distance)
+		var dif_vector = attacker.attacker_position - attacker.look_to.global_position
+		var prev_pos = dif_vector.normalized() * (prev_ring.radius + attacker.variation)
+		var next_pos = dif_vector.normalized() * (next_ring.radius + attacker.variation)
+		print(prev_ring.radius, " + ", attacker.variation, " = ", prev_pos)
+		var pos = lerp(prev_pos, next_pos, alpha)
+		attacker.global_position = center.global_position + pos
+
 
 func advance():
 	# hide the advance hint after the first advance
-	$AdvanceHint.visible = false
+	$GUI/AdvanceHint.visible = false
 	
 	# add points to score according to the level
 	add_score(calculate_score_ring())
@@ -219,7 +235,7 @@ func add_score(new_score : int):
 	score += new_score
 	score_label.text = str(score)
 	if score > highscore and highscore > 0:
-		$NewHighscoreLabel.show()
+		$GUI/NewHighscoreLabel.show()
 
 
 func _on_AdvancingTimer_timeout():
@@ -238,7 +254,7 @@ func _on_Player_died():
 	game_over = true
 	toggle_rings_rotation(false)
 	player.toggle_thrusters(false)
-	$ExplosionSound.play()
+	$Misc/ExplosionSound.play()
 
 
 func _on_Player_game_over():
@@ -246,16 +262,16 @@ func _on_Player_game_over():
 	if score > highscore:
 		save_system.save_score(score)
 		game_over_label_text = "New high score:"
-	$GameOver/ScoreLabel.text = game_over_label_text
-	$GameOver/ScoreLabel/Value.text = str(score)
-	$GameOver.visible = true
-	$AdvanceHint.visible = false
+	$GUI/GameOver/ScoreLabel.text = game_over_label_text
+	$GUI/GameOver/ScoreLabel/Value.text = str(score)
+	$GUI/GameOver.visible = true
+	$GUI/AdvanceHint.visible = false
 	can_restart = true
 
 
 func _on_Player_collected_coin():
 	add_score(calculate_score_coin())
-	$CoinSound.play()
+	$Misc/CoinSound.play()
 
 
 func _on_ColorTimer_timeout():
@@ -275,7 +291,7 @@ func _on_PauseButton_button_down():
 	if not paused:
 		paused = true
 		toggle_rings_rotation(false)
-		$Paused.visible = true
+		$GUI/Paused.visible = true
 
 
 func _on_Paused_back_to_main_menu():

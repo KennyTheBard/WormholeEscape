@@ -28,6 +28,5 @@ __meta__ = {
 
 [node name="Space" parent="." instance=ExtResource( 3 )]
 margin_left = 232.667
-margin_top = 30.5204
 margin_right = 232.667
-margin_bottom = 30.5204
+rect_scale = Vector2( 1, 1 )

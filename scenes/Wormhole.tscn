@@ -1,7 +1,7 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/Wormhole.gd" type="Script" id=1]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://props/Stars.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/ScoreCounter.tscn" type="PackedScene" id=4]
 [ext_resource path="res://menu/GameOver.tscn" type="PackedScene" id=5]
@@ -15,6 +15,7 @@
 [ext_resource path="res://scenes/FullscreenModeButton.gd" type="Script" id=13]
 [ext_resource path="res://ui/NewHighscoreLabel.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/fullscreen_on.png" type="Texture" id=15]
+[ext_resource path="res://entities/Attacker.tscn" type="PackedScene" id=16]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -62,60 +63,168 @@ autostart = true
 
 [node name="RingContainer" type="Node2D" parent="."]
 
-[node name="AdvancingTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="Stars" parent="." instance=ExtResource( 3 )]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 look_to_path = NodePath("../Center")
 
-[node name="Score" parent="." instance=ExtResource( 4 )]
+[node name="AttackersContainer" type="Node2D" parent="."]
 
-[node name="Highscore" parent="." instance=ExtResource( 4 )]
-margin_left = 20.7076
-margin_top = 122.198
-margin_right = 238.708
-margin_bottom = 195.198
-text = "Highscore:"
+[node name="Attacker" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 384.54, 119.735 )
+look_to_path = NodePath("../../Center")
 
-[node name="GameOver" parent="." instance=ExtResource( 5 )]
-visible = false
+[node name="Attacker2" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 568.776, 70.4429 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
 
-[node name="Paused" parent="." instance=ExtResource( 6 )]
+[node name="Attacker3" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 640.767, -68.2958 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
 
-[node name="CoinSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
-bus = "SFX"
+[node name="Attacker4" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 821.298, -85.0528 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
 
-[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
-bus = "SFX"
+[node name="Attacker5" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 1138.43, -121.592 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
 
-[node name="PauseButton" type="TextureButton" parent="."]
-margin_left = 1830.72
-margin_top = 977.92
-margin_right = 1937.72
-margin_bottom = 1105.92
-rect_scale = Vector2( 0.5, 0.5 )
-texture_normal = ExtResource( 10 )
+[node name="Attacker24" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 1614.29, 711.17 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker6" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 1261.77, -36.1501 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker7" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 1446.01, 205.477 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker8" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 1598, 239.859 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker9" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 1603.06, 512.464 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker22" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 1527.36, 389.893 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker23" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 1422.81, 0.549255 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker10" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 1507.48, 741.029 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker11" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 1478.84, 925.654 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker12" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 1331.44, 995.408 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker13" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 1227, 1110.47 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker14" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 986.74, 1144.86 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker15" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 808.157, 1162.99 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker16" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 502.618, 1039.94 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker21" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 636.004, 1122.85 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker17" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 365.147, 941.053 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker18" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 348.59, 647.597 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker25" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 438.716, 806.219 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker19" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 339.433, 460.346 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="Attacker20" parent="AttackersContainer" instance=ExtResource( 16 )]
+position = Vector2( 429.559, 319.749 )
+collision_layer = 1
+collision_mask = 1
+look_to_path = NodePath("../../Center")
+
+[node name="GUI" type="Control" parent="."]
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="FullscreenModeButton" type="TextureButton" parent="."]
-margin_left = 1732.29
-margin_top = 977.92
-margin_right = 1839.29
-margin_bottom = 1105.92
-rect_scale = Vector2( 0.5, 0.5 )
-texture_normal = ExtResource( 15 )
-script = ExtResource( 13 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AdvanceHint" type="Label" parent="."]
+[node name="AdvanceHint" type="Label" parent="GUI"]
 anchor_left = 0.518
 anchor_top = 0.436
 anchor_right = 0.518
@@ -129,23 +238,56 @@ text = "Press                                   to play again"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Hint" parent="AdvanceHint" instance=ExtResource( 12 )]
+[node name="Hint" parent="GUI/AdvanceHint" instance=ExtResource( 12 )]
 margin_left = 505.203
 margin_top = 93.7723
 margin_right = 505.203
 margin_bottom = 93.7723
 
-[node name="StartTimer" type="Timer" parent="."]
-wait_time = 0.25
-one_shot = true
-autostart = true
+[node name="Score" parent="GUI" instance=ExtResource( 4 )]
 
-[node name="NewHighscoreLabel" parent="." instance=ExtResource( 14 )]
+[node name="Highscore" parent="GUI" instance=ExtResource( 4 )]
+margin_left = 20.7076
+margin_top = 122.198
+margin_right = 238.708
+margin_bottom = 195.198
+text = "Highscore:"
 
-[node name="AttackersDistance" type="TextureProgress" parent="."]
+[node name="GameOver" parent="GUI" instance=ExtResource( 5 )]
+visible = false
+
+[node name="Paused" parent="GUI" instance=ExtResource( 6 )]
+
+[node name="PauseButton" type="TextureButton" parent="GUI"]
+margin_left = 1830.72
+margin_top = 977.92
+margin_right = 1937.72
+margin_bottom = 1105.92
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullscreenModeButton" type="TextureButton" parent="GUI"]
+margin_left = 1732.29
+margin_top = 977.92
+margin_right = 1860.29
+margin_bottom = 1105.92
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 15 )
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewHighscoreLabel" parent="GUI" instance=ExtResource( 14 )]
+
+[node name="AttackersDistance" type="TextureProgress" parent="GUI"]
 margin_left = 41.948
 margin_top = 294.844
 margin_right = 67.948
@@ -159,17 +301,35 @@ nine_patch_stretch = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Misc" type="Node" parent="."]
+
+[node name="AdvancingTimer" type="Timer" parent="Misc"]
+one_shot = true
+
+[node name="CoinSound" type="AudioStreamPlayer" parent="Misc"]
+stream = ExtResource( 9 )
+bus = "SFX"
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="Misc"]
+stream = ExtResource( 8 )
+bus = "SFX"
+
+[node name="StartTimer" type="Timer" parent="Misc"]
+wait_time = 0.25
+one_shot = true
+autostart = true
 [connection signal="timeout" from="Background/ColorTimer" to="." method="_on_ColorTimer_timeout"]
-[connection signal="timeout" from="AdvancingTimer" to="." method="_on_AdvancingTimer_timeout"]
 [connection signal="collected_coin" from="Player" to="." method="_on_Player_collected_coin"]
 [connection signal="died" from="Player" to="." method="_on_Player_died"]
 [connection signal="game_over" from="Player" to="." method="_on_Player_game_over"]
-[connection signal="back_to_main_menu" from="Paused" to="." method="_on_Paused_back_to_main_menu"]
-[connection signal="button_down" from="PauseButton" to="." method="_on_PauseButton_button_down"]
-[connection signal="mouse_entered" from="PauseButton" to="." method="_on_PauseButton_mouse_entered"]
-[connection signal="mouse_exited" from="PauseButton" to="." method="_on_PauseButton_mouse_exited"]
-[connection signal="button_down" from="FullscreenModeButton" to="FullscreenModeButton" method="_on_FullscreenModeButton_button_down"]
-[connection signal="button_down" from="FullscreenModeButton" to="." method="_on_FullscreenModeButton_button_down"]
-[connection signal="mouse_entered" from="FullscreenModeButton" to="." method="_on_PauseButton_mouse_entered"]
-[connection signal="mouse_exited" from="FullscreenModeButton" to="." method="_on_PauseButton_mouse_exited"]
-[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="back_to_main_menu" from="GUI/Paused" to="." method="_on_Paused_back_to_main_menu"]
+[connection signal="button_down" from="GUI/PauseButton" to="." method="_on_PauseButton_button_down"]
+[connection signal="mouse_entered" from="GUI/PauseButton" to="." method="_on_PauseButton_mouse_entered"]
+[connection signal="mouse_exited" from="GUI/PauseButton" to="." method="_on_PauseButton_mouse_exited"]
+[connection signal="button_down" from="GUI/FullscreenModeButton" to="GUI/FullscreenModeButton" method="_on_FullscreenModeButton_button_down"]
+[connection signal="button_down" from="GUI/FullscreenModeButton" to="." method="_on_FullscreenModeButton_button_down"]
+[connection signal="mouse_entered" from="GUI/FullscreenModeButton" to="." method="_on_PauseButton_mouse_entered"]
+[connection signal="mouse_exited" from="GUI/FullscreenModeButton" to="." method="_on_PauseButton_mouse_exited"]
+[connection signal="timeout" from="Misc/AdvancingTimer" to="." method="_on_AdvancingTimer_timeout"]
+[connection signal="timeout" from="Misc/StartTimer" to="." method="_on_StartTimer_timeout"]
