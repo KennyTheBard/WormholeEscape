@@ -23,8 +23,4 @@ func _process(delta):
 	if OS.window_fullscreen != fullscreen:
 		texture_normal = off_texture if OS.window_fullscreen else on_texture
 		fullscreen = OS.window_fullscreen
-	
 
-
-func _on_FullscreenModeButton_button_down():
-	release_focus()

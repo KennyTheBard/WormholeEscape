@@ -256,6 +256,8 @@ margin_top = 977.92
 margin_right = 1937.72
 margin_bottom = 1105.92
 rect_scale = Vector2( 0.5, 0.5 )
+focus_mode = 0
+enabled_focus_mode = 0
 texture_normal = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -267,6 +269,8 @@ margin_top = 977.92
 margin_right = 1860.29
 margin_bottom = 1105.92
 rect_scale = Vector2( 0.5, 0.5 )
+focus_mode = 0
+enabled_focus_mode = 0
 texture_normal = ExtResource( 15 )
 script = ExtResource( 13 )
 __meta__ = {
@@ -302,7 +306,6 @@ autostart = true
 [connection signal="button_down" from="GUI/PauseButton" to="." method="_on_PauseButton_button_down"]
 [connection signal="mouse_entered" from="GUI/PauseButton" to="." method="_on_PauseButton_mouse_entered"]
 [connection signal="mouse_exited" from="GUI/PauseButton" to="." method="_on_PauseButton_mouse_exited"]
-[connection signal="button_down" from="GUI/FullscreenModeButton" to="GUI/FullscreenModeButton" method="_on_FullscreenModeButton_button_down"]
 [connection signal="button_down" from="GUI/FullscreenModeButton" to="." method="_on_FullscreenModeButton_button_down"]
 [connection signal="mouse_entered" from="GUI/FullscreenModeButton" to="." method="_on_PauseButton_mouse_entered"]
 [connection signal="mouse_exited" from="GUI/FullscreenModeButton" to="." method="_on_PauseButton_mouse_exited"]
