@@ -28,10 +28,12 @@ var player_angle : float = 180
 var game_over : bool = false
 var can_restart : bool = false
 var paused : bool = false
+var advance_hint_visible : bool = false
 var mouse_over_button : bool = false
 var score : int = 0
 var highscore : int = 0
 var attackers_distance : float = -15
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -99,6 +101,7 @@ func _process(delta):
 		paused = false
 		toggle_rings_rotation(true)
 		$GUI/Paused.visible = false
+		$GUI/AdvanceHint.visible = advance_hint_visible
 		return
 	
 	# while advancing ignore everything
@@ -289,6 +292,10 @@ func rand_color(start_interval : float = 0, end_interval : float = 1) -> Color:
 
 func _on_PauseButton_button_down():
 	if not paused:
+		# hide the advance hint while in pause
+		advance_hint_visible = $GUI/AdvanceHint.visible
+		$GUI/AdvanceHint.visible = false
+		
 		paused = true
 		toggle_rings_rotation(false)
 		$GUI/Paused.visible = true

@@ -217,16 +217,15 @@ anchor_left = 0.518
 anchor_top = 0.436
 anchor_right = 0.518
 anchor_bottom = 0.436
-margin_left = 1.0
-margin_top = 668.07
-margin_right = 1919.0
-margin_bottom = 969.066
+margin_left = 2.0
+margin_top = 761.842
+margin_right = 1920.0
+margin_bottom = 1062.84
 custom_fonts/font = ExtResource( 11 )
 text = "Press                                   to play again"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -245,15 +244,14 @@ margin_right = 238.708
 margin_bottom = 195.198
 text = "Highscore:"
 
-[node name="GameOver" parent="GUI" instance=ExtResource( 5 )]
-visible = false
+[node name="NewHighscoreLabel" parent="GUI" instance=ExtResource( 14 )]
 
-[node name="Paused" parent="GUI" instance=ExtResource( 6 )]
+[node name="AttackersDistance" parent="GUI" instance=ExtResource( 17 )]
 
 [node name="PauseButton" type="TextureButton" parent="GUI"]
-margin_left = 1830.72
+margin_left = 1739.14
 margin_top = 977.92
-margin_right = 1937.72
+margin_right = 1846.14
 margin_bottom = 1105.92
 rect_scale = Vector2( 0.5, 0.5 )
 focus_mode = 0
@@ -263,10 +261,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GameOver" parent="GUI" instance=ExtResource( 5 )]
+visible = false
+
+[node name="Paused" parent="GUI" instance=ExtResource( 6 )]
+
 [node name="FullscreenModeButton" type="TextureButton" parent="GUI"]
-margin_left = 1732.29
+margin_left = 1824.92
 margin_top = 977.92
-margin_right = 1860.29
+margin_right = 1952.92
 margin_bottom = 1105.92
 rect_scale = Vector2( 0.5, 0.5 )
 focus_mode = 0
@@ -276,10 +279,6 @@ script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="NewHighscoreLabel" parent="GUI" instance=ExtResource( 14 )]
-
-[node name="AttackersDistance" parent="GUI" instance=ExtResource( 17 )]
 
 [node name="Misc" type="Node" parent="."]
 
@@ -302,10 +301,10 @@ autostart = true
 [connection signal="collected_coin" from="Player" to="." method="_on_Player_collected_coin"]
 [connection signal="died" from="Player" to="." method="_on_Player_died"]
 [connection signal="game_over" from="Player" to="." method="_on_Player_game_over"]
-[connection signal="back_to_main_menu" from="GUI/Paused" to="." method="_on_Paused_back_to_main_menu"]
 [connection signal="button_down" from="GUI/PauseButton" to="." method="_on_PauseButton_button_down"]
 [connection signal="mouse_entered" from="GUI/PauseButton" to="." method="_on_PauseButton_mouse_entered"]
 [connection signal="mouse_exited" from="GUI/PauseButton" to="." method="_on_PauseButton_mouse_exited"]
+[connection signal="back_to_main_menu" from="GUI/Paused" to="." method="_on_Paused_back_to_main_menu"]
 [connection signal="button_down" from="GUI/FullscreenModeButton" to="." method="_on_FullscreenModeButton_button_down"]
 [connection signal="mouse_entered" from="GUI/FullscreenModeButton" to="." method="_on_PauseButton_mouse_entered"]
 [connection signal="mouse_exited" from="GUI/FullscreenModeButton" to="." method="_on_PauseButton_mouse_exited"]
