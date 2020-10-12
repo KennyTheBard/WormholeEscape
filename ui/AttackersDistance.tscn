@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ui/AttackersDistance.gd" type="Script" id=1]
+[ext_resource path="res://assets/enemy_ship.png" type="Texture" id=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 0, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[node name="AttackersDistance" type="TextureProgress"]
+margin_left = 41.948
+margin_top = 294.844
+margin_right = 67.948
+margin_bottom = 1010.84
+max_value = 20.0
+step = 0.001
+texture_under = SubResource( 2 )
+texture_progress = SubResource( 4 )
+fill_mode = 3
+nine_patch_stretch = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AttackerIcon" type="TextureRect" parent="."]
+margin_left = -15.7365
+margin_top = 737.527
+margin_right = 93.2635
+margin_bottom = 865.527
+rect_rotation = -90.0
+rect_scale = Vector2( 0.45, 0.45 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

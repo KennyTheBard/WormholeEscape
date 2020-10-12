@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/Wormhole.gd" type="Script" id=1]
 [ext_resource path="res://entities/Player.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://ui/NewHighscoreLabel.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/fullscreen_on.png" type="Texture" id=15]
 [ext_resource path="res://entities/Attacker.tscn" type="PackedScene" id=16]
+[ext_resource path="res://ui/AttackersDistance.tscn" type="PackedScene" id=17]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -23,20 +24,6 @@ colors = PoolColorArray( 1, 1, 1, 1 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
-
-[sub_resource type="Gradient" id=3]
-offsets = PoolRealArray( 0 )
-colors = PoolColorArray( 0, 1, 1, 1 )
-
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
-
-[sub_resource type="Gradient" id=5]
-offsets = PoolRealArray( 0 )
-colors = PoolColorArray( 1, 0, 0, 1 )
-
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
 
 [node name="Wormhole" type="Node2D"]
 script = ExtResource( 1 )
@@ -69,6 +56,7 @@ autostart = true
 look_to_path = NodePath("../Center")
 
 [node name="AttackersContainer" type="Node2D" parent="."]
+visible = false
 
 [node name="Attacker" parent="AttackersContainer" instance=ExtResource( 16 )]
 position = Vector2( 384.54, 119.735 )
@@ -287,20 +275,7 @@ __meta__ = {
 
 [node name="NewHighscoreLabel" parent="GUI" instance=ExtResource( 14 )]
 
-[node name="AttackersDistance" type="TextureProgress" parent="GUI"]
-margin_left = 41.948
-margin_top = 294.844
-margin_right = 67.948
-margin_bottom = 1010.84
-max_value = 20.0
-step = 0.001
-texture_under = SubResource( 4 )
-texture_progress = SubResource( 6 )
-fill_mode = 3
-nine_patch_stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="AttackersDistance" parent="GUI" instance=ExtResource( 17 )]
 
 [node name="Misc" type="Node" parent="."]
 

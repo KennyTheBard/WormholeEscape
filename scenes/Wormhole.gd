@@ -31,7 +31,7 @@ var paused : bool = false
 var mouse_over_button : bool = false
 var score : int = 0
 var highscore : int = 0
-var attackers_distance : float = -3
+var attackers_distance : float = -15
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -131,9 +131,9 @@ func update_attackers_location():
 		var dif_vector = attacker.attacker_position - attacker.look_to.global_position
 		var prev_pos = dif_vector.normalized() * (prev_ring.radius + attacker.variation)
 		var next_pos = dif_vector.normalized() * (next_ring.radius + attacker.variation)
-		print(prev_ring.radius, " + ", attacker.variation, " = ", prev_pos)
 		var pos = lerp(prev_pos, next_pos, alpha)
 		attacker.global_position = center.global_position + pos
+	$AttackersContainer.visible = true
 
 
 func advance():
@@ -312,5 +312,4 @@ func _on_StartTimer_timeout():
 
 
 func _on_FullscreenModeButton_button_down():
-	print("down")
 	OS.window_fullscreen = not OS.window_fullscreen
